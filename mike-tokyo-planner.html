@@ -1,0 +1,1200 @@
+<!doctype html>
+<title>Thailand & Bali 2026</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* ── tokens ── */
+:root {
+  --g:#F7F2EA; --s:#FFFFFF; --s2:#EDE8DF; --b:rgba(0,0,0,.09);
+  --t:#1A1410; --t2:#5C5248; --t3:#9A9088;
+  --phuket:#E8762A; --samui:#16B8B0; --bali:#5BAF50; --transit:#7B6EC4; --mel:#7A8FA0;
+  --lk:#C89A00; --lk-bg:rgba(200,154,0,.1); --lk-br:rgba(200,154,0,.3);
+  --pd:#2A9FD6; --pd-bg:rgba(42,159,214,.1); --pd-br:rgba(42,159,214,.25);
+  --id:#68A460; --id-bg:rgba(104,164,96,.1); --id-br:rgba(104,164,96,.25);
+  --dn:#C83030; --dn-bg:rgba(200,48,48,.08); --dn-br:rgba(200,48,48,.22);
+  --wn:#C87030; --wn-bg:rgba(200,112,48,.1); --wn-br:rgba(200,112,48,.25);
+  --ok:#3DAA78;
+  --ff:'DM Sans',system-ui,sans-serif;
+  --ffd:'Syne',system-ui,sans-serif;
+  --ffm:'Space Mono','Courier New',monospace;
+  --nh:62px; --sb:env(safe-area-inset-bottom,0px);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --g:#0C0907;--s:#191410;--s2:#231D16;--b:rgba(255,255,255,.08);
+  --t:#EDE7DC;--t2:#AFA89E;--t3:#6A6058;
+}}
+:root[data-theme=dark]{--g:#0C0907;--s:#191410;--s2:#231D16;--b:rgba(255,255,255,.08);--t:#EDE7DC;--t2:#AFA89E;--t3:#6A6058;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--g);color:var(--t);font-family:var(--ff);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ── layout ── */
+#app{display:flex;flex-direction:column;height:100%;overflow:hidden;position:relative}
+#vc{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column}
+#nav{flex-shrink:0;height:calc(var(--nh)+var(--sb));padding-bottom:var(--sb);background:var(--s);border-top:1px solid var(--b);display:flex;align-items:center;z-index:50}
+.nt{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;background:none;border:none;cursor:pointer;color:var(--t3);font-family:var(--ff);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.nt.on{color:var(--phuket)}.nt .ni{font-size:22px;line-height:1.1}
+
+/* ── day strip ── */
+.dstrip{display:flex;gap:7px;overflow-x:auto;padding:10px 16px;scrollbar-width:none;background:var(--g);border-bottom:1px solid var(--b);flex-shrink:0}
+.dstrip::-webkit-scrollbar{display:none}
+.dp{display:flex;flex-direction:column;align-items:center;padding:7px 9px 5px;border-radius:10px;cursor:pointer;border:1.5px solid var(--b);background:var(--s);flex-shrink:0;min-width:42px;transition:all .15s;font-family:var(--ff)}
+.dp-day{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:1px}
+.dp-num{font-family:var(--ffd);font-size:19px;font-weight:800;line-height:1;color:var(--t)}
+.dp-dot{width:5px;height:5px;border-radius:50%;margin-top:4px}
+.dp-w{font-size:9px;color:var(--dn);margin-top:1px}
+.dp.act{border-width:2px}
+.dp.act.phuket{border-color:var(--phuket);background:rgba(232,118,42,.08)}.dp.act.phuket .dp-num,.dp.act.phuket .dp-day{color:var(--phuket)}
+.dp.act.samui{border-color:var(--samui);background:rgba(22,184,176,.08)}.dp.act.samui .dp-num,.dp.act.samui .dp-day{color:var(--samui)}
+.dp.act.bali{border-color:var(--bali);background:rgba(91,175,80,.08)}.dp.act.bali .dp-num,.dp.act.bali .dp-day{color:var(--bali)}
+.dp.act.transit{border-color:var(--transit);background:rgba(123,110,196,.08)}.dp.act.transit .dp-num,.dp.act.transit .dp-day{color:var(--transit)}
+.dp.act.mel{border-color:var(--mel);background:rgba(122,143,160,.08)}.dp.act.mel .dp-num,.dp.act.mel .dp-day{color:var(--mel)}
+
+/* ── day content ── */
+.dcont{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px calc(20px);touch-action:pan-y}
+.dloc{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;color:#fff;margin-bottom:14px}
+.dloc.phuket{background:var(--phuket)}.dloc.samui{background:var(--samui)}.dloc.bali{background:var(--bali)}.dloc.transit{background:var(--transit)}.dloc.mel{background:var(--mel)}
+.dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.dhead-date{font-family:var(--ffd);font-size:22px;font-weight:800;color:var(--t)}
+.today-pip{background:var(--phuket);color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px}
+.stack{display:flex;flex-direction:column;gap:9px}
+
+/* ── cards ── */
+.card{background:var(--s);border-radius:13px;overflow:hidden;border:1px solid var(--b)}
+.card-row{display:flex}
+.stripe{width:5px;flex-shrink:0}
+.stripe.phuket{background:var(--phuket)}.stripe.samui{background:var(--samui)}.stripe.bali{background:var(--bali)}.stripe.transit{background:var(--transit)}.stripe.mel{background:var(--mel)}
+.card-body{flex:1;padding:12px 14px;min-width:0}
+.c-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
+.c-main{flex:1;min-width:0}
+.c-time{font-family:var(--ffm);font-size:13px;font-weight:700;color:var(--t);margin-bottom:2px}
+.c-title{font-size:15px;font-weight:600;color:var(--t);line-height:1.3}
+.c-sub{font-size:12px;color:var(--t2);margin-top:1px;line-height:1.4}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:2px 6px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.b-lk{color:var(--lk);background:var(--lk-bg);border:1px solid var(--lk-br)}
+.b-pd{color:var(--pd);background:var(--pd-bg);border:1px solid var(--pd-br)}
+.b-id{color:var(--id);background:var(--id-bg);border:1px solid var(--id-br)}
+.c-details{display:flex;flex-direction:column;gap:3px;margin-top:7px}
+.c-row{display:flex;align-items:baseline;gap:7px;font-size:12px;color:var(--t2);line-height:1.4}
+.c-row .ci{width:14px;text-align:center;flex-shrink:0;font-size:11px}
+.c-row a{text-decoration:underline;text-underline-offset:2px;color:inherit}
+.ref{font-family:var(--ffm);font-size:11px;font-weight:700;color:var(--t);background:var(--s2);padding:1px 5px;border-radius:4px}
+.c-links{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.lchip{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:600;color:var(--pd);background:var(--pd-bg);border:1px solid var(--pd-br);cursor:pointer;transition:opacity .15s;font-family:var(--ff);-webkit-appearance:none}
+.lchip:hover{opacity:.75}
+.c-actions{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:6px 11px;border-radius:8px;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:var(--ff);transition:opacity .15s;background:var(--s2);color:var(--t2)}
+.btn:hover{opacity:.75}
+.btn-wn{background:var(--wn-bg);color:var(--wn);border:1px solid var(--wn-br)}
+.btn-ok{background:rgba(61,170,120,.12);color:var(--ok);border:1px solid rgba(61,170,120,.25)}
+.note-box{background:var(--s2);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--t2);line-height:1.5;margin-top:8px}
+
+/* deadlines within card */
+.cd-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:700;margin-top:6px}
+.cd-hot{background:var(--dn-bg);color:var(--dn)}
+.cd-warn{background:var(--wn-bg);color:var(--wn)}
+.cd-ok{background:rgba(61,170,120,.1);color:var(--ok)}
+
+/* ── banners ── */
+.banner{border-radius:10px;padding:10px 13px;display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.4}
+.bn-dn{background:var(--dn-bg);border:1px solid var(--dn-br);color:var(--t2)}
+.bn-dn strong,.bn-dn .bi{color:var(--dn)}
+.bn-wn{background:var(--wn-bg);border:1px solid var(--wn-br);color:var(--t2)}
+.bn-wn strong,.bn-wn .bi{color:var(--wn)}
+.bi{flex-shrink:0;font-size:14px;margin-top:1px}
+
+/* ── free time ── */
+.free-card{background:var(--s2);border:1.5px dashed var(--b);border-radius:10px;padding:11px 14px;display:flex;align-items:center;gap:10px}
+.free-card .fi{font-size:18px;flex-shrink:0}
+.free-card .ft{font-size:13px;color:var(--t2)}.free-card .ft strong{color:var(--t);font-weight:600}
+
+/* ── TODAY view ── */
+#v-today{display:flex;flex-direction:column;height:100%;overflow-y:auto;padding:0 0 16px}
+.td-pad{padding:0 16px}
+.today-loc{display:flex;align-items:center;gap:8px;padding:14px 16px 0}
+.today-loc .tl-dot{width:10px;height:10px;border-radius:50%}
+.tl-dot.phuket{background:var(--phuket)}.tl-dot.samui{background:var(--samui)}.tl-dot.bali{background:var(--bali)}.tl-dot.transit{background:var(--transit)}.tl-dot.mel{background:var(--mel)}
+.today-loc .tl-label{font-size:12px;font-weight:700;color:var(--t2)}
+.td-date{font-family:var(--ffd);font-size:24px;font-weight:800;color:var(--t);padding:4px 16px 12px;line-height:1.15}
+
+/* Ready-by hero */
+.rby{border-radius:16px;margin:0 16px 16px;padding:18px 20px;color:#fff;flex-shrink:0}
+.rby.phuket{background:var(--phuket)}.rby.samui{background:var(--samui)}.rby.bali{background:var(--bali)}.rby.transit{background:var(--transit)}
+.rby-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-bottom:3px}
+.rby-time{font-family:var(--ffd);font-size:56px;font-weight:800;line-height:1;margin-bottom:3px}
+.rby-for{font-size:14px;opacity:.9}
+
+/* Countdown hero (pre-trip) */
+.pre-hero{text-align:center;padding:52px 16px 28px}
+.pre-num{font-family:var(--ffd);font-size:96px;font-weight:800;line-height:1;color:var(--phuket)}
+.pre-unit{font-size:20px;font-weight:600;color:var(--t2);margin-bottom:28px}
+.pre-list{background:var(--s);border-radius:13px;border:1px solid var(--b);overflow:hidden;text-align:left}
+.pre-row{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-bottom:1px solid var(--b)}
+.pre-row:last-child{border:none}
+.pre-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.pre-body{flex:1}
+.pre-title{font-size:14px;font-weight:600;color:var(--t);margin-bottom:1px}
+.pre-sub{font-size:12px;color:var(--t2)}
+
+/* Section headers */
+.sh{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:14px 16px 7px}
+.sh:first-child{padding-top:0}
+
+/* Now/next pill */
+.now-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:rgba(61,170,120,.1);border:1px solid rgba(61,170,120,.25);padding:2px 8px;border-radius:20px;margin-bottom:6px}
+.next-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);background:var(--s2);padding:2px 8px;border-radius:20px;margin-bottom:6px}
+
+/* Post-trip */
+.post{text-align:center;padding:72px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.post-em{font-size:64px;margin-bottom:12px}
+.post-h{font-family:var(--ffd);font-size:28px;font-weight:800;color:var(--t);margin-bottom:8px}
+.post-sub{font-size:15px;color:var(--t2)}
+
+/* ── BOOKINGS view ── */
+#v-bookings{overflow-y:auto;padding-bottom:16px}
+.bk-tabs{display:flex;border-bottom:1px solid var(--b);background:var(--s);flex-shrink:0;overflow-x:auto;scrollbar-width:none}
+.bk-tabs::-webkit-scrollbar{display:none}
+.bk-tab{flex:1;min-width:80px;padding:11px 4px 10px;font-size:12px;font-weight:600;font-family:var(--ff);color:var(--t3);background:none;border:none;border-bottom:2.5px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:color .15s,border-color .15s;white-space:nowrap}
+.bk-tab-on{color:var(--phuket);border-bottom-color:var(--phuket)}
+.bk-tab-n{font-size:10px;font-weight:700;background:var(--s2);color:var(--t3);border-radius:10px;padding:1px 6px;font-family:var(--ffm)}
+.bk-tab-on .bk-tab-n{background:rgba(232,118,42,.12);color:var(--phuket)}
+.bk-sec{padding:0 16px}
+.bk-sec-h{font-family:var(--ffd);font-size:13px;font-weight:700;color:var(--t3);letter-spacing:.04em;padding:14px 0 8px;border-bottom:1px solid var(--b);margin-bottom:10px}
+.bk-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-bottom:10px;border-bottom:1px solid var(--b)}
+
+/* ── OPTIONS view ── */
+#v-options{overflow-y:auto;padding:0 0 16px}
+.opt-filter{display:flex;gap:7px;overflow-x:auto;padding:12px 16px 10px;scrollbar-width:none;border-bottom:1px solid var(--b);flex-shrink:0}
+.opt-filter::-webkit-scrollbar{display:none}
+.fbt{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--b);background:var(--s);color:var(--t2);font-family:var(--ff);white-space:nowrap;transition:all .15s;flex-shrink:0}
+.fbt.on{border-color:currentColor}
+.fbt.on.all{color:var(--t);border-color:var(--t2)}
+.fbt.on.phuket{color:var(--phuket);background:rgba(232,118,42,.08)}
+.fbt.on.samui{color:var(--samui);background:rgba(22,184,176,.08)}
+.fbt.on.bali{color:var(--bali);background:rgba(91,175,80,.08)}
+.fbt.on.food{color:var(--lk);background:var(--lk-bg)}
+
+/* ── MODAL ── */
+#modal{position:fixed;inset:0;z-index:200;pointer-events:none}
+#modal.open{pointer-events:all}
+.mo{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .22s;display:flex;align-items:flex-end;justify-content:center}
+.mo.vis{background:rgba(0,0,0,.58);backdrop-filter:blur(3px)}
+.ms{background:var(--s);border-radius:20px 20px 0 0;padding:20px 20px calc(20px + var(--sb));width:100%;max-width:600px;max-height:84vh;overflow-y:auto;transform:translateY(100%);transition:transform .24s cubic-bezier(.32,1,.18,1)}
+.ms.vis{transform:translateY(0)}
+.mh{width:36px;height:4px;background:var(--b);border-radius:2px;margin:0 auto 18px}
+.mt{font-family:var(--ffd);font-size:20px;font-weight:800;color:var(--t);margin-bottom:8px;text-wrap:balance;line-height:1.2}
+.mb{font-size:14px;color:var(--t2);line-height:1.55;margin-bottom:14px}
+.mw{background:var(--dn-bg);border:1px solid var(--dn-br);border-radius:8px;padding:10px 13px;font-size:13px;color:var(--dn);margin-bottom:14px;line-height:1.4}
+.mok{background:rgba(61,170,120,.1);border:1px solid rgba(61,170,120,.25);border-radius:8px;padding:10px 13px;font-size:13px;color:var(--ok);margin-bottom:14px;line-height:1.4}
+.macts{display:flex;flex-direction:column;gap:8px}
+.mbtn{width:100%;justify-content:center;padding:14px;border-radius:12px;font-size:15px;font-weight:600;border:none;cursor:pointer;font-family:var(--ff);display:flex;align-items:center;gap:6px}
+.mbtn-ok{background:var(--ok);color:#fff}
+.mbtn-dn{background:var(--dn);color:#fff}
+.mbtn-cc{background:var(--s2);color:var(--t2)}
+.mi{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--b);background:var(--s2);color:var(--t);font-family:var(--ff);font-size:15px;margin-bottom:10px;outline:none}
+.mi:focus{border-color:var(--pd)}
+.ml{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:5px;display:block}
+
+/* ── HEADER ── */
+#hdr{flex-shrink:0;background:var(--s);border-bottom:1px solid var(--b);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:48px;z-index:20}
+.hdr-title{font-family:var(--ffd);font-size:17px;font-weight:800;color:var(--t);letter-spacing:-.01em}
+.hdr-acts{display:flex;gap:2px}
+.hdr-btn{width:38px;height:38px;border-radius:10px;border:none;background:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:background .12s}
+.hdr-btn:active{background:var(--s2)}
+
+/* ── SEARCH OVERLAY ── */
+#so{position:absolute;inset:0;z-index:80;background:var(--g);display:none;flex-direction:column}
+#so.open{display:flex}
+#so-hdr{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--b);background:var(--s);flex-shrink:0}
+#so-input{flex:1;padding:9px 13px;border-radius:10px;border:1.5px solid var(--b);background:var(--s2);color:var(--t);font-family:var(--ff);font-size:15px;outline:none;-webkit-appearance:none}
+#so-input:focus{border-color:var(--pd)}
+#so-cancel{background:none;border:none;color:var(--pd);font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;padding:0 2px;white-space:nowrap;flex-shrink:0}
+#so-results{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 16px 24px}
+.sr-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin:12px 0 6px}
+.sr-day{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:11px 14px;margin-bottom:8px;cursor:pointer;active:opacity:.7}
+.sr-food{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div id="app">
+  <div id="hdr">
+    <div class="hdr-title">Thailand &amp; Bali 2026</div>
+    <div class="hdr-acts">
+      <button class="hdr-btn" onclick="toggleSearch()" aria-label="Search">🔍</button>
+      <button class="hdr-btn" onclick="openAISheet()" aria-label="Ask AI">✨</button>
+    </div>
+  </div>
+  <div id="vc" role="main"></div>
+  <nav id="nav">
+    <button class="nt on" id="nt-today" onclick="sv('today')"><span class="ni">☀️</span>Today</button>
+    <button class="nt" id="nt-trip" onclick="sv('trip')"><span class="ni">🗓</span>Trip</button>
+    <button class="nt" id="nt-bookings" onclick="sv('bookings')"><span class="ni">📋</span>Bookings</button>
+    <button class="nt" id="nt-options" onclick="sv('options')"><span class="ni">💡</span>Options</button>
+  </nav>
+  <div id="so">
+    <div id="so-hdr">
+      <input id="so-input" type="search" placeholder="Search flights, hotels, activities…" autocomplete="off" oninput="doSearch(this.value)">
+      <button id="so-cancel" onclick="toggleSearch()">Cancel</button>
+    </div>
+    <div id="so-results"></div>
+  </div>
+</div>
+<div id="modal"></div>
+
+<script>
+'use strict';
+/* ══════════════════════════════════════
+   DATA
+══════════════════════════════════════ */
+const TRIP_START='2026-09-17', TRIP_END='2026-09-30';
+
+const DAYS=[
+  {d:'2026-09-17',lbl:'Thu 17 Sep',day:'Thu',num:'17',loc:'phuket', summ:'Fly Melbourne → Phuket. Check in Amari. Late dinner.',conflicts:[]},
+  {d:'2026-09-18',lbl:'Fri 18 Sep',day:'Fri',num:'18',loc:'phuket', summ:'10:00 dental impression. Afternoon & evening free.',conflicts:[]},
+  {d:'2026-09-19',lbl:'Sat 19 Sep',day:'Sat',num:'19',loc:'phuket', summ:'Pencilled: Big Buddha + shopping. Completely editable.',conflicts:['open-day']},
+  {d:'2026-09-20',lbl:'Sun 20 Sep',day:'Sun',num:'20',loc:'samui', summ:'Pack & check out Amari. Leave ~11:15. Fly 13:45 → Koh Samui 14:40. Check in.',conflicts:[]},
+  {d:'2026-09-21',lbl:'Mon 21 Sep',day:'Mon',num:'21',loc:'samui', summ:'Jet ski safari to Pig Island (pending). ~40 min drive each way.',conflicts:['bali-arrival-card']},
+  {d:'2026-09-22',lbl:'Tue 22 Sep',day:'Tue',num:'22',loc:'transit',summ:'⚠️ Self-transfer day. Check out 11:30. Fly Samui 15:25 → Phuket 16:25, then 19:40 → Bali.',conflicts:['self-transfer']},
+  {d:'2026-09-23',lbl:'Wed 23 Sep',day:'Wed',num:'23',loc:'bali',  summ:'Arrive Bali 00:35. Surf lesson TBC. Kecak fire dance evening. Kenji driving.',conflicts:[]},
+  {d:'2026-09-24',lbl:'Thu 24 Sep',day:'Thu',num:'24',loc:'bali',  summ:'⚠️ RECONFIRM GOLF TODAY. Free / surf / beach hop. Kenji driving.',conflicts:['golf-reconfirm']},
+  {d:'2026-09-25',lbl:'Fri 25 Sep',day:'Fri',num:'25',loc:'phuket',summ:'Bali morning free. Kenji 13:30 → airport. Fly 16:10 → Phuket 19:10. Check in Thavorn.',conflicts:[]},
+  {d:'2026-09-26',lbl:'Sat 26 Sep',day:'Sat',num:'26',loc:'phuket',summ:'Free day. Muay Thai 19:30 evening (pending).',conflicts:[]},
+  {d:'2026-09-27',lbl:'Sun 27 Sep',day:'Sun',num:'27',loc:'phuket',summ:'Golf: pickup 08:00, tee 09:10, back ~13:00. Evening: Phuket Old Town Walking Street.',conflicts:[]},
+  {d:'2026-09-28',lbl:'Mon 28 Sep',day:'Mon',num:'28',loc:'phuket',summ:'Crown fitting at Cube Dental (10:00 open). Rest of day completely free — last full day. Andamanda, Karon beach, final dinner.',conflicts:[]},
+  {d:'2026-09-29',lbl:'Tue 29 Sep',day:'Tue',num:'29',loc:'transit',summ:'Late checkout Thavorn. Airport by 11:30. MH795 departs HKT 14:05 → KUL 16:40 · 3h50m layover · MH147 departs 20:30 overnight flat bed.',conflicts:[]},
+  {d:'2026-09-30',lbl:'Wed 30 Sep',day:'Wed',num:'30',loc:'mel',   summ:'Land Melbourne 06:15. You\'re home!',conflicts:[]},
+];
+
+const CONFLICT_DEFS={
+  'self-transfer':{sev:'danger',title:'Self-transfer — separate tickets',body:'Bangkok Airways USM→HKT and AirAsia HKT→DPS are on different airlines. If Bangkok Airways is delayed, AirAsia will NOT rebook you. You need to be at Phuket airport and re-check-in for AirAsia with enough time. No margin for error.'},
+  'golf-reconfirm':{sev:'danger',title:'⚠️ Reconfirm Red Mountain Golf today or it\'s cancelled',body:'Booking with phuketgolfleisure.com is automatically cancelled if not reconfirmed by end of Wed 24 Sep. Call or email now.'},
+  'bali-arrival-card':{sev:'warn',title:'Bali Arrival Card window opens — complete it now',body:'All Indonesia Arrival Card must be submitted within 72h of arrival (00:35 Wed 23 Sep). Window opens Mon 21 Sep. Go to allindonesia.imigrasi.go.id — it\'s free. Only use .go.id domains.'},
+  'open-day':{sev:'warn',title:'Day needs planning',body:'Saturday 19 Sep is completely open. Consider: Big Buddha + shopping, Andamanda water park, Phang Nga Bay, skateparks, or just Patong.'},
+};
+
+// ── base items ──
+const BASE_ITEMS=[
+/* FLIGHTS */
+{id:'F01',type:'flight',status:'locked',date:'2026-09-17',time:'14:50',endTime:'20:40',
+ title:'Melbourne → Phuket',sub:'Jetstar JQ17 · Direct',loc:'transit',
+ addr:'MEL Terminal 4 (Jetstar International) → Phuket HKT',ref:null,cost:null,phone:null,
+ note:'Direct 8h flight. International check-in closes 60min before departure. Terminal 4 at MEL.',
+ links:[{l:'Manage Jetstar',u:'https://www.jetstar.com/au/en/manage-booking'}]},
+
+{id:'F02',type:'flight',status:'locked',date:'2026-09-20',time:'13:45',endTime:'14:40',
+ title:'Phuket → Koh Samui',sub:'Bangkok Airways · 55min',loc:'transit',
+ addr:'Phuket HKT → Koh Samui USM',ref:'Gotogate 1140-793-207',cost:'AUD$1,193.71 return (2 pax)',phone:null,
+ note:'Depart 13:45, arrive 14:40. Part of return fare — both legs on same Gotogate ref. Leave Amari ~11:15.',
+ links:[{l:'Bangkok Airways manage',u:'https://www.bangkokair.com/eng/manage-booking'},{l:'Gotogate',u:'https://www.gotogate.com.au'}]},
+
+{id:'F03',type:'flight',status:'locked',date:'2026-09-22',time:'15:25',endTime:'16:25',
+ title:'Koh Samui → Phuket',sub:'Bangkok Airways · Return leg · Amended from 08:00',loc:'transit',
+ addr:'Koh Samui USM → Phuket HKT',ref:'Gotogate 1140-793-207',cost:'(return leg of same booking)',phone:null,
+ note:'Originally 08:00, amended to 15:25. Depart USM 15:25, arrive HKT 16:25. Separate ticket from AirAsia below.',
+ conflicts:['self-transfer'],
+ links:[{l:'Bangkok Airways manage',u:'https://www.bangkokair.com/eng/manage-booking'}]},
+
+{id:'F04',type:'flight',status:'locked',date:'2026-09-22',time:'19:40',endTime:'00:35 (+1)',
+ title:'Phuket → Bali',sub:'Indonesia AirAsia · ref FFWCVD',loc:'transit',
+ addr:'Phuket HKT → Bali Ngurah Rai DPS',ref:'FFWCVD',cost:null,phone:null,
+ note:'Lands 00:35 Wed 23 Sep. Kenji collecting from DPS. Separate ticket — AirAsia check-in closes ~17:40.',
+ conflicts:['self-transfer'],
+ links:[{l:'Manage AirAsia booking',u:'https://www.airasia.com/en/gb/manage-booking/manage-a-booking.page'}]},
+
+{id:'F05',type:'flight',status:'locked',date:'2026-09-25',time:'16:10',endTime:'19:10',
+ title:'Bali → Phuket',sub:'Indonesia AirAsia · FFWCVD · Direct 4h',loc:'transit',
+ addr:'Bali Ngurah Rai DPS → Phuket HKT',ref:'FFWCVD',cost:null,phone:null,
+ note:'Direct. Kenji drops at DPS ~13:30. Ask Thavorn about airport transfer from HKT — confirm cost and time.',
+ links:[{l:'Manage AirAsia booking',u:'https://www.airasia.com/en/gb/manage-booking/manage-a-booking.page'}]},
+
+{id:'F06',type:'flight',status:'locked',date:'2026-09-29',time:'14:05',endTime:'16:40',
+ title:'Phuket → Kuala Lumpur',sub:'Malaysia Airlines MH795 · Business · 737-800 · 1h35m',loc:'transit',
+ addr:'Phuket HKT → Kuala Lumpur KUL · Seats 3D, 3F',ref:'DQR7IC',cost:'AUD$7,388.70 total · net ~AUD$3,367 after Amex Rewards credit',phone:null,
+ note:'Amex booking 31707641 · Supplier DQR7IC · Business Flex, baggage included. 3h50m layover at KUL. Same booking as MH147.',
+ links:[{l:'Malaysia Airlines manage',u:'https://www.malaysiaairlines.com/au/en/flight-info/manage-booking.html'}]},
+
+{id:'F07',type:'flight',status:'locked',date:'2026-09-29',time:'20:30',endTime:'06:15 (+1)',
+ title:'Kuala Lumpur → Melbourne',sub:'Malaysia Airlines MH147 · Business · A330-900neo · flat bed',loc:'transit',
+ addr:'Kuala Lumpur KUL → Melbourne MEL · Seats 8D, 8G',ref:'DQR7IC',cost:'(same booking as MH795)',phone:null,
+ note:'A330-900neo business: flat bed suites, wireless charging, USB-A/C + AC power, free wifi. Lands MEL 06:15 Wed 30 Sep.',
+ links:[{l:'Malaysia Airlines manage',u:'https://www.malaysiaairlines.com/au/en/flight-info/manage-booking.html'}]},
+
+/* ACCOMMODATION */
+{id:'A01',type:'accom',status:'locked',date:'2026-09-17',endDate:'2026-09-20',time:'check-in late',
+ title:'Amari Phuket',sub:'Two-Bedroom Ocean-View Suite · 3 nights',loc:'phuket',
+ addr:'2 Meun-Ngern Rd, Patong, Phuket',phone:'+66 76 340 850',ref:null,cost:null,
+ note:'Late arrival night 1 (~21:00). No explicit check-out time stated — allow until 11:00 on Sun 20.',
+ links:[{l:'Amari website',u:'https://www.amari.com/phuket'}]},
+
+{id:'A02',type:'accom',status:'locked',date:'2026-09-20',endDate:'2026-09-22',time:'15:00 check-in',
+ title:'Samui Paradise Chaweng Beach Resort',sub:'2 nights · Check-in 15:00 · Check-out 11:30',loc:'samui',
+ addr:'49 Moo 3, Chaweng Beach, Koh Samui',phone:null,ref:'Booking.com (paid)',cost:'~AUD$1,500',
+ note:'Check-out 11:30 SHARP on Tue 22. Store bags, then ~2h free at Chaweng before leaving for airport ~13:30.',
+ links:[{l:'Booking.com reservations',u:'https://www.booking.com/myreservations.html'}]},
+
+{id:'A03',type:'accom',status:'locked',date:'2026-09-23',endDate:'2026-09-25',time:'00:35 arrival',
+ title:'Villa Matahari Reef',sub:'2 bed / 2.5 bath · Uluwatu, Bali · Airbnb',loc:'bali',
+ addr:'Gang Guan, Kuta Selatan, Uluwatu, Bali',phone:null,ref:'Airbnb · Kaia Property Management',cost:null,
+ note:'Arriving 00:35 from DPS. Kenji collecting. Check-out Fri 25 Sep ~13:00.',
+ links:[{l:'Airbnb trips',u:'https://www.airbnb.com.au/trips/v1'}]},
+
+{id:'A04',type:'accom',status:'locked',date:'2026-09-25',endDate:'2026-09-29',time:'check-in from arrival',
+ title:'Thavorn Palm Beach Resort',sub:'Seaview Infinity Pool 2-Bed Duplex Suite · 135m² · Karon Beach',loc:'phuket',
+ addr:'311 Patak Rd, Karon Beach, Phuket',phone:'+66 76 396 090',ref:'Booking 5395132',cost:'~AUD$400/night (4 nights) · Breakfast included',
+ note:'Booked direct. 4.6★ (6,087). Direct beach access, multiple pools with water slides, buffet breakfast. Ask for Eddie at concierge. Karon Beach — ~15 min south of Patong. Kata Sunset View, Halo Rooftop and Starz Rooftop all nearby.',
+ deadlines:[],
+ links:[{l:'Thavorn Palm Beach',u:'https://www.thavornpalmbeach.com'}]},
+
+/* DENTAL */
+{id:'D01',type:'dental',status:'locked',date:'2026-09-18',time:'10:00',
+ title:'Dental: Impression taken',sub:'Cube Dental Clinic · Lab work begins',loc:'phuket',
+ addr:'162/31 Phang Muang Sai Kor, Patong',phone:'+66 76 340 999',ref:null,cost:null,
+ note:'Open 10:00–18:00. Closed Sundays. 4.8★. Lab produces crown during the rest of the trip.',
+ links:[]},
+
+{id:'D02',type:'dental',status:'locked',date:'2026-09-28',time:'TBC (10:00 open)',
+ title:'Dental: Crown fitting',sub:'Cube Dental Clinic · Confirm time before Mon 28',loc:'phuket',
+ addr:'162/31 Phang Muang Sai Kor, Patong',phone:'+66 76 340 999',ref:null,cost:null,
+ note:'Open 10:00–18:00, closed Sundays. 4.8★. Crown fitting Mon 28 — rest of day free after. Flight not until Tue 29 at 14:05.',
+ conflicts:[],links:[]},
+
+/* GOLF */
+{id:'G01',type:'golf',status:'locked',date:'2026-09-27',time:'09:10 tee (08:00 pickup)',
+ title:'Red Mountain Golf',sub:'Pickup 08:00 from Thavorn · Tee 09:10 · Back ~13:00',loc:'phuket',
+ addr:'Red Mountain Golf Club, Kathu, Phuket',phone:null,ref:'phuketgolfleisure.com',cost:'THB 10,400 total (2 golfers) · Pay on arrival',
+ note:'Includes: green fee, caddy, cart, return transfers, THB 200 kiosk voucher, 3 golf balls. Extra: caddy tip THB 500pp, club hire from THB 1,000/set. Visa / Mastercard / cash.',
+ deadlines:[{label:'⚠️ RECONFIRM or CANCELLED',date:'2026-09-24',urgent:true}],
+ links:[{l:'Phuket Golf Leisure',u:'https://www.phuketgolfleisure.com'}]},
+
+/* PENDING ACTIVITIES */
+{id:'P01',type:'activity',status:'pending',date:'2026-09-21',time:'morning (TBC)',
+ title:'Jet Ski — Pig Island Safari',sub:'Samui Sea Sport · WhatsApp sent, awaiting reply',loc:'samui',
+ addr:'Thong Krut pier, SW Koh Samui (40–45 min from Chaweng)',phone:'+66 84 986 4399',ref:null,cost:null,
+ note:'3hr safari: Koh Tan + Pig Island (Koh Madsum) + Five Islands. Snorkelling + photos. 4.8★ (587 reviews). Ask on reply: hotel pickup included? Insurance paperwork?',
+ links:[{l:'WhatsApp +66 84 986 4399',u:'https://wa.me/66849864399'}]},
+
+{id:'P02',type:'activity',status:'pending',date:'2026-09-26',time:'19:30',
+ title:'Muay Thai Fight Night',sub:'Patong Boxing Stadium · Sat 26 preferred · CLOSED SUNDAYS',loc:'phuket',
+ addr:'Sainamyen Rd, Patong',phone:'+66 81 737 7193',ref:null,cost:null,
+ note:'19:30–23:00. ~7 fights. Air-conditioned, cushioned seats. No age limit. Eat beforehand — food inside reviews badly. 4.5★ (885 reviews).',
+ links:[{l:'WhatsApp stadium',u:'https://wa.me/66817377193'}]},
+
+{id:'P03',type:'activity',status:'pending',date:'2026-09-23',time:'TBC (swell-dependent)',
+ title:'Surf Lesson — Bali Bisa',sub:'Dreamland Beach · Instructor confirms 2 days ahead',loc:'bali',
+ addr:'Dreamland Beach, Ungasan (~15–20 min from villa)',phone:'+62 823-4087-1294',ref:null,cost:null,
+ note:'Could be Wed 23 or Thu 24. Instructor calls it based on swell 2 days out. Leave this flexible.',
+ links:[{l:'WhatsApp instructor',u:'https://wa.me/6282340871294'}]},
+
+{id:'P04',type:'transport',status:'pending',date:'2026-09-23',time:'00:35 airport pickup',
+ title:'Kenji: DPS Airport Pickup',sub:'Bali Kenji Tour & Travel · Arrival 00:35 Wed 23',loc:'bali',
+ addr:'DPS Ngurah Rai → Villa Matahari Reef, Uluwatu',phone:null,ref:null,cost:'Late-night surcharge TBC (on top of IDR 750k/day)',
+ note:'Contact via Facebook Messenger "Bali Kenji". Driver team of four — confirm which team member is coming and exact late-night price.',
+ links:[{l:'Facebook "Bali Kenji"',u:'https://www.facebook.com/search/top?q=bali+kenji+tour'}]},
+
+{id:'P05',type:'transport',status:'pending',date:'2026-09-23',time:'all day',
+ title:'Kenji: Tour Day 1',sub:'Surf lesson + Uluwatu + beaches',loc:'bali',
+ addr:'Dreamland, Bingin, Padang Padang, Balangan, Uluwatu Temple',phone:null,ref:null,cost:'IDR 750,000 per car / 10-hour day (~AUD$70)',
+ note:'Includes driver-guide, commentary, photos. Up to 7 people per car. Confirm itinerary day before.',
+ links:[{l:'Facebook "Bali Kenji"',u:'https://www.facebook.com/search/top?q=bali+kenji+tour'}]},
+
+{id:'P06',type:'transport',status:'pending',date:'2026-09-24',time:'all day',
+ title:'Kenji: Tour Day 2',sub:'Free / second surf / beach hop',loc:'bali',
+ addr:'TBC — confirm with Kenji the day before',phone:null,ref:null,cost:'IDR 750,000 per car / 10-hour day',
+ note:'Day 2 with Kenji. Itinerary flexible — decide the morning based on swell and energy.',
+ links:[{l:'Facebook "Bali Kenji"',u:'https://www.facebook.com/search/top?q=bali+kenji+tour'}]},
+
+{id:'P07',type:'transport',status:'pending',date:'2026-09-25',time:'13:30 pickup',
+ title:'Kenji: DPS Airport Drop-off',sub:'Villa → DPS for 16:10 flight',loc:'bali',
+ addr:'Villa Matahari Reef → Bali Ngurah Rai DPS',phone:null,ref:null,cost:'Included in Kenji arrangement',
+ note:'Pickup ~13:30 from villa for 16:10 AirAsia. Confirm the night before.',
+ links:[{l:'Facebook "Bali Kenji"',u:'https://www.facebook.com/search/top?q=bali+kenji+tour'}]},
+
+/* IDEAS */
+{id:'I01',type:'activity',status:'idea',date:'2026-09-23',time:'19:00',
+ title:'Kecak Fire Dance',sub:'Uluwatu Temple · Arrive 18:00–18:30',loc:'bali',
+ addr:'Pura Luhur Uluwatu, Uluwatu, Bali',phone:null,ref:null,cost:'~IDR 150,000pp (pay on arrival)',
+ note:'Show starts 19:00. Arrive early for cliff-edge seating + sunset. Spectacular setting. One of the best things to do in Bali.',links:[]},
+
+{id:'I02',type:'activity',status:'idea',date:null,time:'10:00',
+ title:'Andamanda Water Park',sub:'Kathu · ~15 min from Patong · Best Sat 19 or Sat 26',loc:'phuket',
+ addr:'Kathu, Phuket',phone:'+66 76 646 777',ref:null,cost:'~THB 1,136pp online (much more at gate)',
+ note:'Open 10:00–19:00. Wave pool opens 12:00. Book online. ⚠️ Some rides: combined weight 300–380kg — two people may not qualify. Call ahead. 4.3★.',
+ links:[{l:'Andamanda tickets',u:'https://www.andamanda.com'}]},
+
+{id:'I03',type:'activity',status:'idea',date:null,time:'morning',
+ title:'Ear Cleaning / Spa',sub:'Two top-rated Patong options',loc:'phuket',
+ addr:'Patong (see notes)',phone:null,ref:null,cost:null,
+ note:'Pure Serenity Luxury Spa: 4.9★, 10:00–01:00, +66 62 723 9828. Ton Mai Se Thong: 4.9★, 10:00–01:00, +66 94 629 3801. Call ahead — ear cleaning not always on standard menu.',links:[]},
+
+{id:'I04',type:'activity',status:'idea',date:'2026-09-19',time:'07:00',
+ title:'Big Buddha + Shopping Day',sub:'Pencilled Sat 19 — not locked',loc:'phuket',
+ addr:'Phuket Big Buddha → Chalong → Central Phuket → Patong',phone:null,ref:null,cost:null,
+ note:'Leave 07:00–07:30 for Big Buddha (arrive early — no crowds). Chalong coffee ~09:30. Central Phuket 10:30 (shopping + lunch). Back mid-afternoon. Or: Big Buddha early, then Jungceylon/Central Patong locally.',links:[]},
+
+{id:'I05',type:'activity',status:'idea',date:null,time:'anytime',
+ title:'Phuket Extreme Skatepark',sub:'Ezra\'s pick · Best on the island',loc:'phuket',
+ addr:'Talat Yai, Phuket',phone:null,ref:null,cost:null,
+ note:'4.6★. Open 06:00–22:00. Roofed and floodlit. Best skatepark on Phuket.',links:[]},
+
+{id:'I06',type:'activity',status:'idea',date:null,time:'07:00–20:00',
+ title:'Youtopia Skatepark',sub:'Ezra\'s pick · Surf-skate + pump track',loc:'phuket',
+ addr:'Rawai, Phuket (~25 min from Patong)',phone:null,ref:null,cost:'~THB 350 for 2h (board/scooter/pad hire)',
+ note:'4.5★. Surf-skate + pump track. Air-con café. Board/scooter hire available.',links:[]},
+
+{id:'I07',type:'activity',status:'idea',date:null,time:'full day',
+ title:'Phang Nga Bay Day Tour',sub:'James Bond Island + sea caves · Not researched yet',loc:'phuket',
+ addr:'Departs Phuket (multiple operators)',phone:null,ref:null,cost:null,
+ note:'Popular — book ahead. Kayaking through sea caves is the highlight. Need to research and compare operators.',links:[]},
+
+{id:'I08',type:'activity',status:'idea',date:'2026-09-27',time:'~16:00–22:00',
+ title:'Phuket Old Town Walking Street',sub:'Sunday only · After golf',loc:'phuket',
+ addr:'Thalang Rd, Phuket Old Town',phone:null,ref:null,cost:'Free entry (food costs)',
+ note:'Sunday evenings ~16:00–22:00. Sino-Portuguese shophouses, local crowd. Pair with One Chun or Kannya restaurant. Verify current hours closer to the date.',links:[]},
+
+{id:'I09',type:'activity',status:'idea',date:null,time:null,
+ title:'My Bali Activity',sub:'Browse & book Bali tours, transfers & experiences',loc:'bali',
+ addr:null,phone:null,ref:null,cost:null,
+ note:'Local Bali activity booking site — tours, day trips, ATV, water sports, cultural experiences.',
+ links:[{l:'mybaliactivity.com',u:'https://mybaliactivity.com'}]},
+];
+
+// Food/restaurant options (for options tab)
+const FOOD_ITEMS=[
+{id:'R01',type:'food',status:'idea',date:null,time:'12:00–00:00',
+ title:'Naughty Nuri\'s',sub:'Patong · Pork ribs · Good for Ezra',loc:'phuket',
+ addr:'Rat Uthit Rd, Patong',phone:'+66 61 173 0011',ref:null,cost:null,
+ note:'4.7★ (6,043). Casual, generous portions. Best bet for a teenager.',links:[]},
+
+{id:'R02',type:'food',status:'idea',date:null,time:'17:30–23:00',
+ title:'Malika Sky Bar',sub:'Patong · 180° hilltop sunset + steak',loc:'phuket',
+ addr:'Phrabaramee Rd, Patong',phone:'+66 88 819 9923',ref:null,cost:null,
+ note:'4.9★ (2,690). Arrive early evening for best light. Panoramic views.',links:[]},
+
+{id:'R03',type:'food',status:'idea',date:null,time:'12:00–22:00',
+ title:'Kata Sunset View',sub:'Kata · Thai food · Has a pool',loc:'phuket',
+ addr:'Patak Soi 2, Kata',phone:'+66 83 969 0491',ref:null,cost:null,
+ note:'4.9★. Pool + showers + towels for guests. Sunset over the sea. Excellent Thai.',links:[]},
+
+{id:'R04',type:'food',status:'idea',date:'2026-09-17',time:'Thu 19:00 fire show',
+ title:'Pine Beach Bar — Thursday Fire Show',sub:'Kamala Beach · Every Thursday 19:00',loc:'phuket',
+ addr:'Kamala Beach, Phuket',phone:'+66 76 629 999',ref:null,cost:null,
+ note:'4.7★. Fire show every Thursday. Good Thu 17 Sep (after check-in, Kamala is en route from airport) or Thu 24.',links:[]},
+
+{id:'R05',type:'food',status:'idea',date:null,time:'12:00–04:00',
+ title:'FLYO Rooftop Beach Club',sub:'Patong · Rooftop pool + DJ',loc:'phuket',
+ addr:'Patong',phone:'+66 85 879 8510',ref:null,cost:null,
+ note:'4.9★ (1,882). Go early evening — turns into a party late. Rooftop pool, great views.',links:[]},
+
+{id:'R06',type:'food',status:'idea',date:'2026-09-27',time:'10:00–22:00',
+ title:'One Chun Cafe',sub:'Old Town · Michelin-recognised · Crab curry',loc:'phuket',
+ addr:'48/1 Thep Krasattri Rd, Phuket Old Town',phone:'+66 76 355 909',ref:null,cost:null,
+ note:'4.4★ (6,632). Michelin-recognised. Order the crab meat yellow curry — reviewers call it best Thai dish of their trip. Also Moo Hong, fish cakes, pomelo salad. ⚠️ 30–40 min wait at peak. Spicy.',links:[]},
+
+{id:'R07',type:'food',status:'idea',date:'2026-09-27',time:'Fri–Sun 10:00–00:00',
+ title:'Kannya (กันยา)',sub:'Old Town · Next door to One Chun · Less spicy',loc:'phuket',
+ addr:'50 Thep Krasattri Rd, Phuket Old Town',phone:'+66 91 959 6154',ref:null,cost:null,
+ note:'4.9★ (49, opened ~2026). Moo Hong with Phuket pineapple is the standout. Spice level suits everyone — better for Ezra. Three floors, striking interior, cocktail list. Good backup if One Chun has a wait.',links:[]},
+
+{id:'R08',type:'food',status:'idea',date:null,time:'12:00–23:00',
+ title:'Jonny Brisket',sub:'Bang Tao · BBQ + steak · 30 min from Patong',loc:'phuket',
+ addr:'15 Lagoon Rd, Bang Tao Beach',phone:'+66 81 254 5512',ref:null,cost:null,
+ note:'4.5★ (326). 800g pork ribs, chorizo, steak. +12% service charge. Specify doneness clearly.',links:[]},
+
+{id:'R09',type:'food',status:'idea',date:null,time:'16:00–23:00',
+ title:'Halo Rooftop Bar',sub:'Karon · Glow Hotel · Happy hour 17–19 buy-one-get-one',loc:'phuket',
+ addr:'Glow Hotel, Karon Beach',phone:'+66 76 686 888',ref:null,cost:null,
+ note:'4.8★. Happy hour 17:00–19:00 BOGO. Live band evenings. Walking distance from Thavorn.',links:[]},
+
+{id:'R10',type:'food',status:'idea',date:null,time:'16:30–01:00',
+ title:'Starz Rooftop',sub:'Karon · Sea + Big Buddha views',loc:'phuket',
+ addr:'Karon Beach, Phuket',phone:'+66 76 398 116',ref:null,cost:null,
+ note:'4.8★ (693). Sea views, Big Buddha views, big menu. Near Thavorn.',links:[]},
+
+{id:'R11',type:'food',status:'idea',date:null,time:'10:30–20:00',
+ title:'Secret Bay Phuket Cafe',sub:'Kamala-Patong road · Cliffside view · Sunset',loc:'phuket',
+ addr:'198 Kamala-Patong Rd, Phuket',phone:'+66 66 153 9463',ref:null,cost:null,
+ note:'4.3★ (450). Order at entrance (1 item pp), then ~100 steps down to terraced cliff seating. Go for the view + sunset drink — reviewers say food is on paper/plastic, built more for photos. Closes 20:00.',links:[]},
+];
+
+const BALI_CHECKLIST=[
+  {id:'bc1',label:'e-VOA (Visa on Arrival)',sub:'evisa.imigrasi.go.id · IDR 500,000 (~AUD$50) pp · Apply before flying',link:{l:'Apply e-VOA',u:'https://evisa.imigrasi.go.id'},tip:'Only .go.id domains. Enables e-gates at DPS — skip the queue. Ezra (15) qualifies with biometric passport.'},
+  {id:'bc2',label:'All Indonesia Arrival Card',sub:'allindonesia.imigrasi.go.id · FREE · Within 72h before arrival',link:{l:'Complete Arrival Card',u:'https://allindonesia.imigrasi.go.id'},tip:'Window opens ~20 Sep (72h before 00:35 Wed 23). Do it from Koh Samui or Phuket. It\'s FREE — any site charging for this is a scam.'},
+  {id:'bc3',label:'Bali Tourist Levy',sub:'lovebali.baliprov.go.id · IDR 150,000 (~AUD$15) pp · Before flying or on arrival',link:{l:'Pay Levy',u:'https://lovebali.baliprov.go.id'},tip:'⚠️ Tourism police run random checks at Uluwatu — screenshot the QR code. Fixed price IDR 150,000 — don\'t pay more.'},
+];
+
+const STREET_FOOD={
+ phuket:[
+   {name:'Moo Hong',desc:'Pork belly braised in soy, garlic + pepper. Phuket\'s signature dish.'},
+   {name:'Mee Hokkien',desc:'Thick yellow noodles with egg, pork and seafood in rich stock.'},
+   {name:'O-Aew',desc:'Shaved ice dessert with jelly and beans. Invented in Phuket.'},
+   {name:'Apong',desc:'Thin crispy coconut pancake in a bowl-shaped pan.'},
+ ],
+ classic:[
+   {name:'Moo Ping',desc:'Grilled pork skewers + sticky rice from any cart. Best cheap breakfast.'},
+   {name:'Pad Kra Pao',desc:'Minced pork, holy basil, chilli, fried egg on top.'},
+   {name:'Roti',desc:'Folded pancake with banana + condensed milk. Street carts at night.'},
+   {name:'Mango sticky rice',desc:'Non-negotiable.'},
+ ]
+};
+
+/* ══════════════════════════════════════
+   STATE
+══════════════════════════════════════ */
+let S={overrides:{},customItems:[],baliChecks:{}};
+let CAP=null, READONLY=false;
+let VIEW='today', SEL_DAY='', OPT_F='all', BK_TAB='flights';
+let SWIPE_X=0, SEARCH_OPEN=false, SEARCH_Q='', PENDING_LINK='';
+
+function initSelDay(){
+  const t=todayStr();
+  const d=DAYS.find(d=>d.d===t);
+  SEL_DAY=d?t:TRIP_START;
+}
+
+function effectItem(id){
+  const base=[...BASE_ITEMS,...FOOD_ITEMS,...(S.customItems||[])].find(i=>i.id===id);
+  if(!base) return null;
+  return {...base,...(S.overrides[id]||{})};
+}
+function allItems(){
+  return [...BASE_ITEMS,...FOOD_ITEMS,...(S.customItems||[])].map(i=>effectItem(i.id)).filter(Boolean);
+}
+function itemsForDay(date){
+  return allItems().filter(i=>{
+    if(!i.date) return false;
+    if(i.date===date) return true;
+    return false;
+  }).sort((a,b)=>(a.time||'zz').localeCompare(b.time||'zz'));
+}
+
+/* ══════════════════════════════════════
+   PERSISTENCE
+══════════════════════════════════════ */
+async function loadState(){
+  try{const r=await fetch('state.json?t='+Date.now());if(r.ok)S=await r.json();}catch{}
+}
+async function saveState(){
+  if(!CAP||READONLY)return;
+  try{await CAP.publish({'state.json':JSON.stringify(S)});}
+  catch(e){if(e&&e.code==='not_writer')READONLY=true;}
+}
+function saveUI(){
+  try{sessionStorage.setItem('tui2',JSON.stringify({v:VIEW,sd:SEL_DAY,of:OPT_F,bt:BK_TAB}));}catch{}
+}
+function loadUI(){
+  try{const u=JSON.parse(sessionStorage.getItem('tui2')||'{}');
+    if(u.v)VIEW=u.v;if(u.sd)SEL_DAY=u.sd;if(u.of)OPT_F=u.of;if(u.bt)BK_TAB=u.bt;
+  }catch{}
+}
+
+/* ══════════════════════════════════════
+   HELPERS
+══════════════════════════════════════ */
+function todayStr(){return new Date().toISOString().split('T')[0];}
+function daysUntil(d){const n=new Date(),t=new Date(d+'T12:00:00');n.setHours(0,0,0,0);t.setHours(0,0,0,0);return Math.round((t-n)/864e5);}
+function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function locColor(loc){return{phuket:'var(--phuket)',samui:'var(--samui)',bali:'var(--bali)',transit:'var(--transit)',mel:'var(--mel)'}[loc]||'var(--t3)';}
+function locLabel(loc){return{phuket:'Phuket',samui:'Koh Samui',bali:'Bali',transit:'In transit',mel:'Melbourne'}[loc]||loc;}
+
+function cdTag(date,label,urgent){
+  const d=daysUntil(date);
+  if(d<0)return`<span class="cd-tag cd-ok">✓ ${esc(label)}</span>`;
+  if(d===0)return`<span class="cd-tag cd-hot">🚨 ${esc(label)}: TODAY</span>`;
+  if(urgent&&d<=5)return`<span class="cd-tag cd-hot">⚠️ ${esc(label)}: ${d}d</span>`;
+  if(d<=14)return`<span class="cd-tag cd-warn">⏳ ${esc(label)}: ${d} days</span>`;
+  return`<span class="cd-tag cd-ok">📅 ${esc(label)}: ${d} days</span>`;
+}
+
+function badge(status){
+  if(status==='locked')return`<span class="badge b-lk">🔒 Locked</span>`;
+  if(status==='pending')return`<span class="badge b-pd">⏳ Pending</span>`;
+  return`<span class="badge b-id">💡 Idea</span>`;
+}
+
+function banners(conflicts){
+  if(!conflicts||!conflicts.length)return'';
+  return conflicts.map(id=>{
+    const c=CONFLICT_DEFS[id];if(!c)return'';
+    const cls=c.sev==='danger'?'bn-dn':'bn-wn',ic=c.sev==='danger'?'🚨':'⚠️';
+    return`<div class="banner ${cls}"><span class="bi">${ic}</span><div><strong>${esc(c.title)}</strong><br>${esc(c.body)}</div></div>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════
+   CARD RENDERER
+══════════════════════════════════════ */
+function card(item,opts={}){
+  if(!item)return'';
+  const{compact=false,showDate=false}=opts;
+  const icon={flight:'✈️',accom:'🏨',dental:'🦷',golf:'⛳',activity:'🎯',transport:'🚗',food:'🍽️'}[item.type]||'📍';
+  let timeStr=item.time&&item.time!=='null'?item.time:'';
+  if(item.endTime&&timeStr)timeStr+=` → ${item.endTime}`;
+  else if(item.endTime)timeStr=item.endTime;
+
+  const dlBadges=(item.deadlines||[]).map(dl=>cdTag(dl.date,dl.label,dl.urgent)).join(' ');
+  const conflictHtml=banners(item.conflicts);
+  const linkHtml=(item.links||[]).map(lk=>`<button type="button" class="lchip" data-url="${esc(lk.u)}" data-label="${esc(lk.l)}" onclick="openLink(this.dataset.label,this.dataset.url)">🔗 ${esc(lk.l)}</button>`).join('');
+
+  let acts='';
+  if(!compact){
+    if(item.status==='locked')acts=`<div class="c-actions"><button class="btn btn-wn" onclick="doUnlock('${esc(item.id)}')" aria-label="Unlock to edit">🔓 Unlock to edit</button></div>`;
+    else if(item.status==='pending')acts=`<div class="c-actions"><button class="btn btn-ok" onclick="doConfirm('${esc(item.id)}')" aria-label="Mark confirmed">✅ Mark as confirmed</button></div>`;
+  }
+
+  return`<div class="card" id="card-${esc(item.id)}">
+    <div class="card-row">
+      <div class="stripe ${esc(item.loc||'phuket')}"></div>
+      <div class="card-body">
+        <div class="c-top">
+          <div class="c-main">
+            ${showDate&&item.date?`<div style="font-size:10px;color:var(--t3);font-weight:700;margin-bottom:2px;letter-spacing:.04em;text-transform:uppercase">${item.date.slice(5).replace('-',' ')}</div>`:''}
+            ${timeStr?`<div class="c-time">${esc(timeStr)}</div>`:''}
+            <div class="c-title">${icon} ${esc(item.title)}</div>
+            ${item.sub?`<div class="c-sub">${esc(item.sub)}</div>`:''}
+          </div>
+          ${badge(item.status)}
+        </div>
+        <div class="c-details">
+          ${item.addr?`<div class="c-row"><span class="ci">📍</span><span>${esc(item.addr)}</span></div>`:''}
+          ${item.phone?`<div class="c-row"><span class="ci">📞</span><a href="tel:${esc(item.phone)}">${esc(item.phone)}</a></div>`:''}
+          ${item.ref?`<div class="c-row"><span class="ci">🎫</span><span class="ref">${esc(item.ref)}</span></div>`:''}
+          ${item.cost?`<div class="c-row"><span class="ci">💰</span><span style="font-family:var(--ffm);font-size:11px">${esc(item.cost)}</span></div>`:''}
+          ${!compact&&item.note?`<div class="c-row"><span class="ci">ℹ️</span><span style="font-size:12px;line-height:1.5">${esc(item.note)}</span></div>`:''}
+        </div>
+        ${dlBadges?`<div style="margin-top:7px;display:flex;flex-wrap:wrap;gap:5px">${dlBadges}</div>`:''}
+        ${conflictHtml?`<div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">${conflictHtml}</div>`:''}
+        ${linkHtml?`<div class="c-links">${linkHtml}</div>`:''}
+        ${acts}
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ══════════════════════════════════════
+   BALI CHECKLIST
+══════════════════════════════════════ */
+function renderBaliChecklist(){
+  const checks=S.baliChecks||{};
+  const allDone=BALI_CHECKLIST.every(c=>checks[c.id]);
+  if(allDone)return`<div style="margin:12px 16px 0;padding:10px 14px;background:var(--ok);border-radius:10px;display:flex;align-items:center;gap:10px"><span style="font-size:18px">✅</span><div style="font-size:13px;font-weight:600;color:#fff">Bali entry requirements — all done!</div></div>`;
+  return`<div style="margin:14px 16px 0">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px">🇮🇩 Bali entry requirements</div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      ${BALI_CHECKLIST.map(c=>{
+        const done=!!checks[c.id];
+        return`<div style="background:var(--s);border:1.5px solid ${done?'var(--ok)':'var(--b)'};border-radius:11px;padding:11px 13px;display:flex;gap:11px;align-items:flex-start">
+          <button onclick="toggleBaliCheck('${c.id}')" style="flex-shrink:0;width:22px;height:22px;border-radius:6px;border:2px solid ${done?'var(--ok)':'var(--b)'};background:${done?'var(--ok)':'transparent'};cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px">
+            ${done?`<span style="color:#fff;font-size:12px;font-weight:700">✓</span>`:''}
+          </button>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:14px;font-weight:600;color:${done?'var(--t3)':'var(--t)'};text-decoration:${done?'line-through':'none'}">${esc(c.label)}</div>
+            <div style="font-size:12px;color:var(--t3);margin-top:2px">${esc(c.sub)}</div>
+            ${!done?`<div style="font-size:11px;color:var(--t2);margin-top:5px;line-height:1.4">${esc(c.tip)}</div>`:''}
+            ${!done&&c.link?`<button type="button" data-url="${esc(c.link.u)}" data-label="${esc(c.link.l)}" onclick="openLink(this.dataset.label,this.dataset.url)" style="display:inline-block;margin-top:6px;font-size:12px;font-weight:600;color:var(--pd);background:none;border:none;cursor:pointer;padding:0;font-family:var(--ff)">${esc(c.link.l)} ↗</button>`:''}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+function toggleBaliCheck(id){
+  if(!S.baliChecks)S.baliChecks={};
+  S.baliChecks[id]=!S.baliChecks[id];
+  render();saveState();
+}
+
+/* ══════════════════════════════════════
+   VIEW: TODAY
+══════════════════════════════════════ */
+function renderToday(){
+  const t=todayStr();
+  const dStart=daysUntil(TRIP_START), dEnd=daysUntil(TRIP_END);
+
+  // Pre-trip
+  if(dStart>0){
+    const allChecked=BALI_CHECKLIST.every(c=>(S.baliChecks||{})[c.id]);
+    const actions=[
+      {ic:'🏌️',title:'Golf reconfirm deadline: Wed 24 Sep',sub:cdTag('2026-09-24','Red Mountain Golf — RECONFIRM',true)},
+      {ic:'🚗',title:'Confirm Bali Kenji total price',sub:'Include late-night DPS pickup surcharge + confirm driver name'},
+      {ic:'📅',title:'Plan Saturday 19 Sep',sub:'Big Buddha + shopping pencilled but not locked — decide'},
+      ...(allChecked?[]:[{ic:'🇮🇩',title:'Bali entry requirements',sub:`${BALI_CHECKLIST.filter(c=>!(S.baliChecks||{})[c.id]).length} of ${BALI_CHECKLIST.length} items incomplete — see checklist below`}]),
+    ];
+    return`<div id="v-today">
+      <div class="pre-hero">
+        <div class="pre-num">${dStart}</div>
+        <div class="pre-unit">days until Thailand 🌏</div>
+      </div>
+      <div style="padding:0 16px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px">Before you go</div>
+        <div class="pre-list">
+          ${actions.map(a=>`<div class="pre-row"><span class="pre-icon">${a.ic}</span><div class="pre-body"><div class="pre-title">${a.title}</div><div class="pre-sub">${a.sub}</div></div></div>`).join('')}
+        </div>
+      </div>
+      ${renderBaliChecklist()}
+    </div>`;
+  }
+
+  // Post-trip
+  if(dEnd<0){
+    return`<div id="v-today"><div class="post"><div class="post-em">🏡</div><div class="post-h">You're home!</div><div class="post-sub">Trip complete · Sep 17 – 30, 2026</div></div></div>`;
+  }
+
+  // In-trip
+  const dayObj=DAYS.find(d=>d.d===t)||DAYS[DAYS.length-1];
+  const items=itemsForDay(t);
+  const flights=items.filter(i=>i.type==='flight');
+  const accomIn=items.filter(i=>i.type==='accom'&&i.date===t);
+  const activities=items.filter(i=>!['flight','accom'].includes(i.type));
+
+  // Compute "be ready by"
+  let rbyTime=null,rbyFor='',rbyLoc=dayObj.loc;
+  const firstFlight=flights.filter(f=>f.time&&f.time.match(/^\d\d:\d\d$/)).sort((a,b)=>a.time.localeCompare(b.time))[0];
+  if(firstFlight){
+    const[h,m]=firstFlight.time.split(':').map(Number);
+    const dep=h*60+m,rdy=dep-120;
+    rbyTime=`${String(Math.floor(rdy/60)).padStart(2,'0')}:${String(rdy%60).padStart(2,'0')}`;
+    rbyFor=`Airport check-in for ${firstFlight.title}`;
+  } else if(t==='2026-09-27'){
+    rbyTime='08:00';rbyFor='Golf pickup from Thavorn lobby';
+  } else if(t==='2026-09-28'&&items.find(i=>i.id==='D02')){
+    rbyTime='09:30';rbyFor='Cube Dental (crown fitting)';
+  }
+
+  // NOW / NEXT
+  const now=new Date(),nowMins=now.getHours()*60+now.getMinutes();
+  const timedItems=items.filter(i=>i.time&&i.time.match(/^\d\d:\d\d$/)).sort((a,b)=>a.time.localeCompare(b.time));
+  let nowItem=null,nextItem=null;
+  for(let i=0;i<timedItems.length;i++){
+    const[h,m]=timedItems[i].time.split(':').map(Number);
+    const mins=h*60+m;
+    if(mins<=nowMins){nowItem=timedItems[i];}
+    else if(!nextItem){nextItem=timedItems[i];}
+  }
+
+  const dayConf=(DAYS.find(d=>d.d===t)||{}).conflicts||[];
+
+  return`<div id="v-today">
+    <div class="today-loc">
+      <span class="tl-dot ${dayObj.loc}"></span>
+      <span class="tl-label">${locLabel(dayObj.loc)}</span>
+    </div>
+    <div class="td-date">${dayObj.lbl}</div>
+
+    ${dayConf.length?`<div style="padding:0 16px;display:flex;flex-direction:column;gap:7px;margin-bottom:14px">${banners(dayConf)}</div>`:''}
+
+    ${rbyTime?`<div class="rby ${rbyLoc}">
+      <div class="rby-label">Be ready by</div>
+      <div class="rby-time">${rbyTime}</div>
+      <div class="rby-for">${esc(rbyFor)}</div>
+    </div>`:''}
+
+    ${nowItem||nextItem?`<div class="td-pad">
+      ${nowItem?`<div style="margin-bottom:10px"><div class="now-pill">● Now</div>${card(nowItem,{compact:true})}</div>`:''}
+      ${nextItem?`<div style="margin-bottom:10px"><div class="next-pill">▸ Next</div>${card(nextItem,{compact:true})}</div>`:''}
+    </div>`:''}
+
+    ${flights.length?`<div class="sh">Flights today</div><div style="padding:0 16px;display:flex;flex-direction:column;gap:9px">${flights.map(i=>card(i,{compact:true})).join('')}</div>`:''}
+    ${accomIn.length?`<div class="sh">Check-in</div><div style="padding:0 16px;display:flex;flex-direction:column;gap:9px">${accomIn.map(i=>card(i,{compact:true})).join('')}</div>`:''}
+    ${activities.filter(i=>i!==nowItem&&i!==nextItem).length?`<div class="sh">Also today</div><div style="padding:0 16px;display:flex;flex-direction:column;gap:9px">${activities.filter(i=>i!==nowItem&&i!==nextItem).map(i=>card(i,{compact:true})).join('')}</div>`:''}
+
+    ${!flights.length&&!activities.length&&!accomIn.length?`<div style="padding:0 16px"><div class="free-card"><span class="fi">🌴</span><div class="ft"><strong>Free time all day</strong><br>Nothing locked in — the day is yours.</div></div></div>`:''}
+    ${(t>='2026-09-20'&&t<='2026-09-22'&&!BALI_CHECKLIST.every(c=>(S.baliChecks||{})[c.id]))?renderBaliChecklist():''}
+  </div>`;
+}
+
+/* ══════════════════════════════════════
+   VIEW: TRIP (day picker)
+══════════════════════════════════════ */
+function renderTrip(){
+  const t=todayStr();
+  const strip=DAYS.map(day=>{
+    const hasConf=(day.conflicts||[]).length>0;
+    const isToday=day.d===t;
+    const isSel=day.d===SEL_DAY;
+    const dotColor=`background:${locColor(day.loc)}`;
+    return`<button class="dp${isSel?' act '+day.loc:''}" onclick="selDay('${day.d}')" aria-label="${esc(day.lbl)}" aria-pressed="${isSel}">
+      <span class="dp-day">${esc(day.day)}</span>
+      <span class="dp-num">${esc(day.num)}</span>
+      <span class="dp-dot" style="${dotColor}"></span>
+      ${hasConf?`<span class="dp-w">!</span>`:''}
+      ${isToday&&!isSel?`<span style="font-size:8px;color:var(--phuket);font-weight:700;margin-top:1px">TODAY</span>`:''}
+    </button>`;
+  }).join('');
+
+  const day=DAYS.find(d=>d.d===SEL_DAY)||DAYS[0];
+  const isToday=day.d===t;
+  const dayItems=itemsForDay(day.d);
+  const dayConf=day.conflicts||[];
+
+  // Staying-at check
+  const stayingAt=allItems().find(i=>i.type==='accom'&&i.date&&i.endDate&&i.date<day.d&&i.endDate>=day.d);
+
+  let content='';
+  if(day.d===TRIP_END){
+    content=`<div class="post" style="padding:40px 0"><div class="post-em">🏡</div><div class="post-h">Home!</div><div class="post-sub">Land Melbourne 06:15</div></div>`;
+  } else {
+    const itemsHtml=dayItems.length?dayItems.map(i=>card(i)).join(''):`<div class="free-card"><span class="fi">🌴</span><div class="ft"><strong>Free time</strong> — nothing locked in.</div></div>`;
+    const stayHtml=stayingAt?`<div class="free-card" style="margin-top:9px"><span class="fi">🏨</span><div class="ft"><strong>Staying at:</strong> ${esc(stayingAt.title)}<br><span style="font-size:11px">${esc(stayingAt.addr||'')}</span></div></div>`:'';
+    content=`
+      ${dayConf.length?`<div style="display:flex;flex-direction:column;gap:7px;margin-bottom:12px">${banners(dayConf)}</div>`:''}
+      <div style="margin-bottom:10px;font-size:13px;color:var(--t2);line-height:1.5">${esc(day.summ)}</div>
+      <div class="stack">${itemsHtml}</div>
+      ${stayHtml}
+    `;
+  }
+
+  return`<div id="v-trip" style="display:flex;flex-direction:column;height:100%;overflow:hidden">
+    <div class="dstrip" id="dstrip">${strip}</div>
+    <div class="dcont" id="dcont"
+         ontouchstart="SWIPE_X=event.changedTouches[0].screenX"
+         ontouchend="handleSwipe(event)">
+      <div class="dhead">
+        <div class="dhead-date">${esc(day.lbl)}</div>
+        <div style="display:flex;align-items:center;gap:7px">
+          ${isToday?`<span class="today-pip">TODAY</span>`:''}
+          <span class="dloc ${day.loc}">${locLabel(day.loc)}</span>
+        </div>
+      </div>
+      ${content}
+    </div>
+  </div>`;
+}
+
+function handleSwipe(e){
+  const dx=SWIPE_X-e.changedTouches[0].screenX;
+  if(Math.abs(dx)<50)return;
+  const idx=DAYS.findIndex(d=>d.d===SEL_DAY);
+  if(dx>0&&idx<DAYS.length-1)selDay(DAYS[idx+1].d);
+  else if(dx<0&&idx>0)selDay(DAYS[idx-1].d);
+}
+
+function selDay(date){
+  SEL_DAY=date;
+  if(VIEW!=='trip')sv('trip');
+  else render();
+}
+
+/* ══════════════════════════════════════
+   VIEW: BOOKINGS
+══════════════════════════════════════ */
+function setBkTab(t){BK_TAB=t;saveUI();render();}
+
+function renderBookings(){
+  const items=allItems();
+  const flights=items.filter(i=>i.type==='flight').sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  const hotels=items.filter(i=>i.type==='accom').sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  const activities=items.filter(i=>!['flight','accom'].includes(i.type)).sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+
+  // Golf deadline alert
+  const gd=daysUntil('2026-09-24');
+  const alert=gd>=0&&gd<=7?`<div class="banner bn-dn" style="margin:0 16px 14px"><span class="bi">🚨</span><div><strong>Reconfirm Red Mountain Golf</strong><br>${gd===0?'TODAY — do it now':gd+' day'+(gd===1?'':'s')+' left'}. Call phuketgolfleisure.com or booking is cancelled.</div></div>`:'';
+
+  const tabs=[{k:'flights',l:'✈️ Flights',n:flights.length},{k:'hotels',l:'🏨 Hotels',n:hotels.length},{k:'activities',l:'🎯 Activities',n:activities.length}];
+  const tabBar=`<div class="bk-tabs">${tabs.map(t=>`<button class="bk-tab${BK_TAB===t.k?' bk-tab-on':''}" onclick="setBkTab('${t.k}')">${t.l}<span class="bk-tab-n">${t.n}</span></button>`).join('')}</div>`;
+
+  const pending=BK_TAB==='flights'?flights.filter(i=>i.status==='pending'):BK_TAB==='hotels'?hotels.filter(i=>i.status==='pending'):activities.filter(i=>i.status==='pending');
+  const locked=BK_TAB==='flights'?flights.filter(i=>i.status==='locked'):BK_TAB==='hotels'?hotels.filter(i=>i.status==='locked'):activities.filter(i=>i.status==='locked');
+  const ideas=BK_TAB==='activities'?activities.filter(i=>i.status==='idea'):[];
+
+  const sec=(title,arr,opts)=>arr.length?`<div class="bk-sec"><div class="bk-sec-h">${title}</div><div class="stack">${arr.map(i=>card(i,opts||{})).join('')}</div></div>`:'';
+
+  return`<div id="v-bookings">
+    ${tabBar}
+    <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:0">
+      ${alert}
+      ${sec('⏳ Pending',pending,{showDate:true})}
+      ${sec('🔒 Confirmed',locked,{showDate:true})}
+      ${sec('💡 Ideas',ideas,{showDate:true})}
+      ${!pending.length&&!locked.length&&!ideas.length?`<div style="text-align:center;padding:40px 0;color:var(--t3)">Nothing here.</div>`:''}
+    </div>
+  </div>`;
+}
+
+/* ══════════════════════════════════════
+   VIEW: OPTIONS
+══════════════════════════════════════ */
+function renderOptions(){
+  const ideas=allItems().filter(i=>i.status==='idea'&&i.type!=='food');
+  const food=[...FOOD_ITEMS].map(i=>effectItem(i.id)).filter(Boolean);
+  const filters=[{k:'all',l:'All ideas'},{k:'phuket',l:'Phuket'},{k:'samui',l:'Samui'},{k:'bali',l:'Bali'},{k:'food',l:'🍽️ Eat & drink'}];
+  const fHtml=filters.map(f=>`<button class="fbt on ${f.k}${OPT_F===f.k?' on '+f.k:''}" style="${OPT_F!==f.k?'color:var(--t3);border-color:var(--b)':''}" onclick="setOF('${f.k}')">${f.l}</button>`).join('');
+
+  let items=OPT_F==='food'?food:ideas.filter(i=>OPT_F==='all'||i.loc===OPT_F);
+
+  // Street food section
+  let sfHtml='';
+  if(OPT_F==='all'||OPT_F==='phuket'||OPT_F==='food'){
+    const mk=(label,arr)=>`<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:7px">${label}</div>${arr.map(f=>`<div style="display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid var(--b)"><span style="font-size:13px;font-weight:600;color:var(--t);width:130px;flex-shrink:0">${esc(f.name)}</span><span style="font-size:12px;color:var(--t2)">${esc(f.desc)}</span></div>`).join('')}</div>`;
+    sfHtml=`<div style="padding:0 16px;margin-top:16px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:10px">Street food — must try</div>
+      <div style="background:var(--s);border-radius:12px;border:1px solid var(--b);padding:12px 14px">
+        ${mk('Phuket specialties',STREET_FOOD.phuket)}
+        ${mk('Classics for Ezra',STREET_FOOD.classic)}
+        <div style="font-size:12px;color:var(--t2);margin-top:4px">📍 Best spot: Thalang Rd Old Town walking street, Sunday evenings ~16:00–22:00 (Sun 27 Sep after golf). Also Malin Plaza, Patong.</div>
+      </div>
+    </div>`;
+  }
+
+  return`<div id="v-options">
+    <div style="padding:14px 16px 0">
+      <div style="font-family:var(--ffd);font-size:20px;font-weight:800;color:var(--t);margin-bottom:3px">Ideas & Options</div>
+      <div style="font-size:13px;color:var(--t2);margin-bottom:12px">Unscheduled — not booked, not forgotten.</div>
+    </div>
+    <div class="opt-filter" style="padding:0 16px 10px;margin-bottom:0">${fHtml}</div>
+    <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:9px">
+      ${items.map(i=>card(i,{showDate:!!i.date})).join('')}
+      ${!items.length?`<div style="text-align:center;padding:28px 0;color:var(--t3)">Nothing here yet.</div>`:''}
+    </div>
+    ${sfHtml}
+    <div style="height:16px"></div>
+  </div>`;
+}
+
+/* ══════════════════════════════════════
+   RENDER
+══════════════════════════════════════ */
+function render(){
+  const vc=document.getElementById('vc');
+  if(!vc)return;
+  if(VIEW==='today')vc.innerHTML=renderToday();
+  else if(VIEW==='trip')vc.innerHTML=renderTrip();
+  else if(VIEW==='bookings')vc.innerHTML=renderBookings();
+  else vc.innerHTML=renderOptions();
+
+  // Scroll selected day pill into view
+  if(VIEW==='trip'){
+    requestAnimationFrame(()=>{
+      const strip=document.getElementById('dstrip');
+      const active=strip?.querySelector('.dp.act');
+      if(active)active.scrollIntoView({inline:'center',behavior:'smooth'});
+    });
+  }
+
+  document.querySelectorAll('.nt').forEach(b=>b.classList.toggle('on',b.id==='nt-'+VIEW));
+  saveUI();
+}
+
+function sv(v){VIEW=v;render();}
+function setOF(f){OPT_F=f;render();}
+
+/* ══════════════════════════════════════
+   MODAL
+══════════════════════════════════════ */
+function openModal(html){
+  const r=document.getElementById('modal');
+  r.innerHTML=`<div class="mo" onclick="closeModal(event)"><div class="ms" onclick="event.stopPropagation()"><div class="mh"></div>${html}</div></div>`;
+  r.classList.add('open');
+  requestAnimationFrame(()=>{r.querySelector('.mo').classList.add('vis');r.querySelector('.ms').classList.add('vis');});
+}
+function closeModal(e){
+  if(e&&!e.target.classList.contains('mo'))return;
+  _doClose();
+}
+function closeModalForce(){_doClose();}
+function _doClose(){
+  const r=document.getElementById('modal');
+  r.querySelector('.mo')?.classList.remove('vis');
+  r.querySelector('.ms')?.classList.remove('vis');
+  setTimeout(()=>{r.innerHTML='';r.classList.remove('open');},260);
+}
+
+/* ── Unlock flow ── */
+function doUnlock(id){
+  const item=effectItem(id);if(!item)return;
+  openModal(`<div class="mt">Unlock "${esc(item.title)}"?</div>
+    <div class="mb">This is a confirmed booking. To change it you need to contact the airline or hotel directly.</div>
+    <div class="mw">⚠️ Money has been paid or a confirmation exists. Unlocking this doesn't change the booking — it just lets you edit the notes here.</div>
+    ${item.ref?`<div style="margin-bottom:12px"><div class="ml">Reference</div><span class="ref">${esc(item.ref)}</span></div>`:''}
+    ${item.phone?`<div style="margin-bottom:12px"><div class="ml">Phone</div><a href="tel:${esc(item.phone)}" style="color:var(--pd);font-size:14px">${esc(item.phone)}</a></div>`:''}
+    ${(item.links||[]).map(lk=>`<button type="button" class="lchip" data-url="${esc(lk.u)}" data-label="${esc(lk.l)}" onclick="openLink(this.dataset.label,this.dataset.url)" style="margin-bottom:8px">🔗 ${esc(lk.l)}</button>`).join('')}
+    <div class="macts" style="margin-top:16px"><button class="mbtn mbtn-cc" onclick="closeModalForce()">Close</button></div>`);
+}
+
+/* ── Confirm pending ── */
+function doConfirm(id){
+  const item=effectItem(id);if(!item)return;
+  openModal(`<div class="mt">Confirm "${esc(item.title)}"</div>
+    <div class="mb">Mark as locked once you have a confirmation reference from the provider.</div>
+    <div class="mok">✅ Locking this marks it as booked and paid — it will show a gold lock badge everywhere.</div>
+    <label class="ml" for="rf">Confirmation reference (optional)</label>
+    <input id="rf" class="mi" type="text" placeholder="e.g. TG123456" autocomplete="off">
+    <label class="ml" for="ct">Cost (optional)</label>
+    <input id="ct" class="mi" type="text" placeholder="e.g. THB 169,000 total" autocomplete="off">
+    <div class="macts">
+      <button class="mbtn mbtn-ok" onclick="doConfirmSave('${esc(id)}')">🔒 Lock this booking</button>
+      <button class="mbtn mbtn-cc" onclick="closeModalForce()">Cancel</button>
+    </div>`);
+}
+function doConfirmSave(id){
+  const ref=document.getElementById('rf')?.value||'',cost=document.getElementById('ct')?.value||'';
+  S.overrides[id]={...(S.overrides[id]||{}),status:'locked'};
+  if(ref)S.overrides[id].ref=ref;if(cost)S.overrides[id].cost=cost;
+  closeModalForce();render();saveState();
+}
+
+/* ══════════════════════════════════════
+   SEARCH
+══════════════════════════════════════ */
+function toggleSearch(){
+  SEARCH_OPEN=!SEARCH_OPEN;
+  const so=document.getElementById('so');
+  if(!so)return;
+  if(SEARCH_OPEN){
+    so.classList.add('open');SEARCH_Q='';
+    const inp=document.getElementById('so-input');
+    if(inp){inp.value='';requestAnimationFrame(()=>inp.focus());}
+    doSearch('');
+  }else{so.classList.remove('open');SEARCH_Q='';}
+}
+
+function doSearch(q){
+  SEARCH_Q=q;
+  const res=document.getElementById('so-results');
+  if(!res)return;
+  const lq=q.trim().toLowerCase();
+
+  if(!lq){
+    res.innerHTML=`<div class="sr-label">JUMP TO DAY</div>${DAYS.map(d=>`<div class="sr-day" onclick="searchGoDay('${d.d}')"><div style="font-size:13px;font-weight:600;color:var(--t)">${esc(d.lbl)}</div><div style="font-size:12px;color:var(--t2);margin-top:2px">${esc(d.summ.slice(0,70))}${d.summ.length>70?'…':''}</div></div>`).join('')}`;
+    return;
+  }
+
+  const matchDays=DAYS.filter(d=>(d.lbl+' '+d.summ+' '+locLabel(d.loc)).toLowerCase().includes(lq));
+  const matchItems=[...BASE_ITEMS,...FOOD_ITEMS].filter(i=>[(i.title||''),(i.sub||''),(i.addr||''),(i.note||''),(i.ref||'')].join(' ').toLowerCase().includes(lq));
+
+  if(!matchDays.length&&!matchItems.length){
+    res.innerHTML=`<div style="text-align:center;padding:40px 0;color:var(--t3);font-size:14px">No results for &ldquo;${esc(q)}&rdquo;</div>`;
+    return;
+  }
+
+  const ICON={flight:'✈️',accom:'🏨',dental:'🦷',golf:'⛳',activity:'🎯',transport:'🚗',food:'🍽️'};
+  let html='';
+  if(matchDays.length){
+    html+=`<div class="sr-label">DAYS (${matchDays.length})</div>`;
+    html+=matchDays.map(d=>`<div class="sr-day" onclick="searchGoDay('${d.d}')"><div style="font-size:13px;font-weight:600;color:var(--t)">${esc(d.lbl)}</div><div style="font-size:12px;color:var(--t2);margin-top:2px">${esc(d.summ.slice(0,80))}${d.summ.length>80?'…':''}</div></div>`).join('');
+  }
+  if(matchItems.length){
+    html+=`<div class="sr-label">ITEMS (${matchItems.length})</div>`;
+    html+=matchItems.map(i=>`<div class="sr-day" onclick="searchGoItem('${esc(i.id)}')"><div style="font-size:13px;font-weight:600;color:var(--t)">${ICON[i.type]||'📍'} ${esc(i.title)}</div><div style="font-size:12px;color:var(--t2);margin-top:2px">${esc((i.sub||i.addr||'').slice(0,60))}</div></div>`).join('');
+  }
+  res.innerHTML=html;
+}
+
+function searchGoDay(date){toggleSearch();SEL_DAY=date;sv('trip');}
+
+function searchGoItem(id){
+  const item=effectItem(id);if(!item)return;
+  toggleSearch();
+  if(item.date){SEL_DAY=item.date;sv('trip');return;}
+  if(item.status==='locked'||item.status==='pending'){
+    BK_TAB=item.type==='flight'?'flights':item.type==='accom'?'hotels':'activities';
+    sv('bookings');
+  }else{sv('options');}
+}
+
+/* ══════════════════════════════════════
+   LINK OPENER  (sandbox-safe)
+══════════════════════════════════════ */
+function openLink(label,url){
+  PENDING_LINK=url;
+  const isTel=url.startsWith('tel:');
+  const isWa=url.includes('wa.me');
+  const icon=isTel?'📞':isWa?'💬':'🔗';
+  const action=isTel?'Call':isWa?'Open in WhatsApp':'Open link';
+  openModal(`<div class="mt">${esc(label)}</div>
+    <div style="font-size:12px;color:var(--t2);word-break:break-all;background:var(--s2);padding:10px 12px;border-radius:8px;margin-bottom:16px;font-family:var(--ffm);line-height:1.4">${esc(url)}</div>
+    <div class="macts">
+      <button class="mbtn mbtn-ok" onclick="doOpenLink()">${icon} ${esc(action)}</button>
+      <button class="mbtn mbtn-cc" onclick="doCopyLink()">📋 Copy URL</button>
+      <button class="mbtn mbtn-cc" onclick="closeModalForce()">Close</button>
+    </div>`);
+}
+
+function doOpenLink(){
+  /* Synchronous in click handler — popup blockers allow this */
+  window.open(PENDING_LINK,'_blank','noopener,noreferrer');
+  closeModalForce();
+}
+
+function doCopyLink(){
+  syncCopy(PENDING_LINK);
+  if(navigator.clipboard)navigator.clipboard.writeText(PENDING_LINK).catch(()=>{});
+  closeModalForce();
+}
+
+function syncCopy(text){
+  try{
+    const el=document.createElement('textarea');
+    el.value=text;el.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0';
+    document.body.appendChild(el);el.focus();el.select();
+    document.execCommand('copy');document.body.removeChild(el);
+  }catch{}
+}
+
+/* ══════════════════════════════════════
+   ASK AI
+══════════════════════════════════════ */
+function buildTripContext(){
+  const lines=['=== THAILAND & BALI TRIP 2026 ===','Dates: Thu 17 Sep – Wed 30 Sep, 2026','Travellers: Mike (adult), wife (adult), Ezra (15, son)',''];
+  lines.push('ITINERARY:');
+  DAYS.forEach(d=>{
+    lines.push(`${d.lbl} (${locLabel(d.loc)}): ${d.summ}`);
+    itemsForDay(d.d).forEach(i=>lines.push(`  - ${i.time?i.time+' ':''} ${i.title} [${i.status}]${i.ref?' ref:'+i.ref:''}`));
+  });
+  lines.push('','CONFIRMED BOOKINGS:');
+  allItems().filter(i=>i.status==='locked').forEach(i=>lines.push(`  ${i.title}: ${i.sub||''} ${i.ref?'ref:'+i.ref:''} ${i.cost||''}`));
+  lines.push('','PENDING (not yet confirmed):');
+  allItems().filter(i=>i.status==='pending').forEach(i=>lines.push(`  ${i.title}: ${i.sub||''} ${i.phone?'phone:'+i.phone:''}`));
+  return lines.join('\n');
+}
+
+function openAISheet(){
+  openModal(`<div class="mt">✨ Ask AI</div>
+    <div class="mb">Type your question. Tap the button — it copies your full trip context + question to clipboard and opens Claude in a new tab. Paste and ask.</div>
+    <label class="ml" for="ai-q">Your question</label>
+    <textarea id="ai-q" class="mi" rows="3" placeholder="e.g. Best dinner near Karon Beach? Uluwatu Temple dress code?" style="resize:none;line-height:1.5"></textarea>
+    <div class="macts">
+      <button class="mbtn mbtn-ok" id="ai-go" onclick="doCopyAndOpenAI()">📋 Copy &amp; open Claude</button>
+      <button class="mbtn mbtn-cc" onclick="showTripContextModal()">👁 Preview context</button>
+      <button class="mbtn mbtn-cc" onclick="closeModalForce()">Cancel</button>
+    </div>
+    <div id="ai-status" style="display:none;margin-top:10px;padding:10px 12px;background:rgba(61,170,120,.1);border:1px solid rgba(61,170,120,.25);border-radius:8px;font-size:13px;color:var(--ok)"></div>`);
+  setTimeout(()=>document.getElementById('ai-q')?.focus(),300);
+}
+
+function doCopyAndOpenAI(){
+  const q=(document.getElementById('ai-q')?.value||'').trim();
+  const ctx=buildTripContext();
+  const text=q?ctx+'\n\n=== MY QUESTION ===\n'+q:ctx;
+  /* Sync copy before window.open — same gesture, same tick */
+  syncCopy(text);
+  if(navigator.clipboard)navigator.clipboard.writeText(text).catch(()=>{});
+  /* Open Claude synchronously — popup blockers allow this from a click handler */
+  window.open('https://claude.ai','_blank','noopener,noreferrer');
+  const btn=document.getElementById('ai-go');
+  const st=document.getElementById('ai-status');
+  if(btn){btn.textContent='✅ Done';btn.disabled=true;}
+  if(st){st.style.display='block';st.textContent='Trip context copied. Claude opened — paste with ⌘V or long-press → Paste.';}
+}
+
+function showTripContextModal(){
+  const ctx=buildTripContext();
+  openModal(`<div class="mt">Trip context</div>
+    <div class="mb" style="font-size:12px">What gets pasted into Claude. Tap inside and long-press → Select All → Copy if clipboard button didn\'t work.</div>
+    <textarea class="mi" rows="10" style="font-family:var(--ffm);font-size:11px;resize:none" readonly onclick="this.select()">${esc(ctx)}</textarea>
+    <div class="macts"><button class="mbtn mbtn-cc" onclick="closeModalForce()">Close</button></div>`);
+}
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+async function init(){
+  initSelDay();
+  loadUI();
+  try{if(window.claude?.use)CAP=await window.claude.use('artifact');}catch{}
+  await loadState();
+  render();
+}
+init();
+</script>
