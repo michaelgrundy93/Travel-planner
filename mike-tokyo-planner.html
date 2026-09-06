@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 /* ── tokens ── */
 :root {
@@ -216,6 +217,16 @@ a{color:inherit;text-decoration:none}
 .sr-food{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:11px 14px;margin-bottom:8px}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ── MAPS view ── */
+#v-maps{display:flex;flex-direction:column;height:100%;overflow:hidden}
+#lf-map{flex:1;min-height:0;position:relative;z-index:0}
+.map-legend{padding:7px 14px;background:var(--s);border-top:1px solid var(--b);display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;flex-shrink:0;align-items:center}
+.map-legend::-webkit-scrollbar{display:none}
+.map-legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--t2);white-space:nowrap;flex-shrink:0}
+.leaflet-popup-content{font-family:var(--ff);font-size:13px;line-height:1.45;min-width:140px}
+.leaflet-popup-content strong{font-size:14px;font-weight:600;color:#1a1410;display:block;margin-bottom:3px}
+.leaflet-popup-content span{font-size:12px;color:#5c5248}
 </style>
 
 <div id="app">
@@ -232,6 +243,7 @@ a{color:inherit;text-decoration:none}
     <button class="nt" id="nt-trip" onclick="sv('trip')"><span class="ni">🗓</span>Trip</button>
     <button class="nt" id="nt-bookings" onclick="sv('bookings')"><span class="ni">📋</span>Bookings</button>
     <button class="nt" id="nt-options" onclick="sv('options')"><span class="ni">💡</span>Options</button>
+    <button class="nt" id="nt-maps" onclick="sv('maps')"><span class="ni">🗺️</span>Maps</button>
   </nav>
   <div id="so">
     <div id="so-hdr">
@@ -243,6 +255,7 @@ a{color:inherit;text-decoration:none}
 </div>
 <div id="modal"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 'use strict';
 /* ══════════════════════════════════════
@@ -458,6 +471,12 @@ const BASE_ITEMS=[
  addr:null,phone:null,ref:null,cost:null,
  note:'Local Bali activity booking site — tours, day trips, ATV, water sports, cultural experiences.',
  links:[{l:'mybaliactivity.com',u:'https://mybaliactivity.com'}]},
+
+{id:'I10',type:'activity',status:'idea',date:'2026-09-28',time:'anytime',
+ title:'Tiger Ink Phuket',sub:'Tattoo studio · Patong · Option for last full day Mon 28',loc:'phuket',
+ addr:'Patong, Phuket',phone:null,ref:null,cost:null,
+ note:'Well-regarded Patong tattoo studio. Last full day — crown fitting done by mid-morning, rest of day free. Good opportunity if you\'ve been thinking about a souvenir tattoo. Book a consultation or walk-in. Check Instagram or Google for current artist portfolio and pricing.',
+ links:[{l:'Google: Tiger Ink Phuket',u:'https://www.google.com/search?q=Tiger+Ink+Phuket+tattoo'}]},
 ];
 
 // Food/restaurant options (for options tab)
@@ -544,7 +563,7 @@ const STREET_FOOD={
 ══════════════════════════════════════ */
 let S={overrides:{},customItems:[],baliChecks:{}};
 let CAP=null, READONLY=false;
-let VIEW='today', SEL_DAY='', OPT_F='all', BK_TAB='flights';
+let VIEW='today', SEL_DAY='', OPT_F='all', BK_TAB='flights', MAP_LOC='phuket';
 let SWIPE_X=0, SEARCH_OPEN=false, SEARCH_Q='', PENDING_LINK='';
 
 function initSelDay(){
@@ -581,11 +600,11 @@ async function saveState(){
   catch(e){if(e&&e.code==='not_writer')READONLY=true;}
 }
 function saveUI(){
-  try{sessionStorage.setItem('tui2',JSON.stringify({v:VIEW,sd:SEL_DAY,of:OPT_F,bt:BK_TAB}));}catch{}
+  try{sessionStorage.setItem('tui2',JSON.stringify({v:VIEW,sd:SEL_DAY,of:OPT_F,bt:BK_TAB,ml:MAP_LOC}));}catch{}
 }
 function loadUI(){
   try{const u=JSON.parse(sessionStorage.getItem('tui2')||'{}');
-    if(u.v)VIEW=u.v;if(u.sd)SEL_DAY=u.sd;if(u.of)OPT_F=u.of;if(u.bt)BK_TAB=u.bt;
+    if(u.v)VIEW=u.v;if(u.sd)SEL_DAY=u.sd;if(u.of)OPT_F=u.of;if(u.bt)BK_TAB=u.bt;if(u.ml)MAP_LOC=u.ml;
   }catch{}
 }
 
@@ -953,14 +972,117 @@ function renderOptions(){
 }
 
 /* ══════════════════════════════════════
+   VIEW: MAPS
+══════════════════════════════════════ */
+const MAP_DATA={
+  phuket:{
+    label:'Phuket',center:[7.889,98.322],zoom:12,
+    markers:[
+      {latlng:[7.8980,98.2960],icon:'🏨',cat:'hotel',name:'Amari Phuket',sub:'2 Meun-Ngern Rd, Patong · 17–20 Sep'},
+      {latlng:[7.8547,98.2970],icon:'🏨',cat:'hotel',name:'Thavorn Palm Beach',sub:'311 Patak Rd, Karon · 25–29 Sep'},
+      {latlng:[7.8942,98.2975],icon:'🦷',cat:'dental',name:'Cube Dental Clinic',sub:'Patong · Fri 18 (impression) &amp; Mon 28 (crown)'},
+      {latlng:[7.9578,98.3357],icon:'⛳',cat:'activity',name:'Red Mountain Golf',sub:'Kathu · Sun 27 Sep, tee 09:10'},
+      {latlng:[7.9527,98.3350],icon:'🎡',cat:'activity',name:'Andamanda Water Park',sub:'Kathu · Option Sat 19 or Mon 28'},
+      {latlng:[7.8976,98.2934],icon:'🥊',cat:'activity',name:'Patong Boxing Stadium',sub:'Muay Thai · Sat 26 Sep 19:30'},
+      {latlng:[7.9613,98.2717],icon:'🔥',cat:'food',name:'Pine Beach Bar',sub:'Kamala · Thu fire show 19:00'},
+      {latlng:[7.8990,98.2974],icon:'🍖',cat:'food',name:'Naughty Nuri\'s',sub:'Rat Uthit Rd, Patong · Ribs'},
+      {latlng:[7.9010,98.2990],icon:'🌅',cat:'food',name:'Malika Sky Bar',sub:'Phrabaramee Rd, Patong · Sunset views'},
+      {latlng:[7.8390,98.2986],icon:'🍜',cat:'food',name:'Kata Sunset View',sub:'Patak Soi 2, Kata · Thai + pool'},
+      {latlng:[7.8553,98.2989],icon:'🥂',cat:'food',name:'Halo Rooftop',sub:'Glow Hotel, Karon · BOGO 17–19'},
+      {latlng:[7.8563,98.2992],icon:'🌊',cat:'food',name:'Starz Rooftop',sub:'Karon Beach · Sea + Big Buddha views'},
+      {latlng:[7.8868,98.3872],icon:'🍛',cat:'food',name:'One Chun Cafe',sub:'Phuket Old Town · Michelin · Crab curry'},
+      {latlng:[7.8870,98.3878],icon:'🍜',cat:'food',name:'Kannya',sub:'Phuket Old Town · Moo Hong · Sun–Fri'},
+      {latlng:[7.8282,98.3103],icon:'🙏',cat:'activity',name:'Phuket Big Buddha',sub:'Chalong · Best before 09:00'},
+      {latlng:[7.9143,98.3706],icon:'🛹',cat:'activity',name:'Phuket Extreme Skatepark',sub:'Talat Yai · Ezra\'s pick'},
+      {latlng:[7.7804,98.3335],icon:'🛹',cat:'activity',name:'Youtopia Skatepark',sub:'Rawai · Surf-skate + pump track'},
+      {latlng:[7.8985,98.2968],icon:'🎨',cat:'activity',name:'Tiger Ink Phuket',sub:'Patong · Tattoo studio · Option Mon 28'},
+    ]
+  },
+  samui:{
+    label:'Koh Samui',center:[9.500,100.010],zoom:12,
+    markers:[
+      {latlng:[9.5280,100.0601],icon:'🏨',cat:'hotel',name:'Samui Paradise Chaweng Beach',sub:'49 Moo 3, Chaweng · 20–22 Sep'},
+      {latlng:[9.3808,99.9779],icon:'🚤',cat:'activity',name:'Pig Island Jet Ski Safari',sub:'Thong Krut pier · Samui Sea Sport · ~40 min drive from Chaweng'},
+    ]
+  },
+  bali:{
+    label:'Bali',center:[-8.806,115.112],zoom:13,
+    markers:[
+      {latlng:[-8.8282,115.1053],icon:'🏠',cat:'hotel',name:'Villa Matahari Reef',sub:'Gang Guan, Uluwatu · 23–25 Sep'},
+      {latlng:[-8.7998,115.1138],icon:'🏄',cat:'activity',name:'Dreamland Beach',sub:'Ungasan · Surf lesson with Bali Bisa'},
+      {latlng:[-8.8291,115.0850],icon:'🕌',cat:'activity',name:'Uluwatu Temple',sub:'Kecak fire dance 19:00 · Arrive 18:00'},
+      {latlng:[-8.7982,115.1056],icon:'🏄',cat:'activity',name:'Bingin Beach',sub:'Kenji tour stop'},
+      {latlng:[-8.8072,115.1064],icon:'🌊',cat:'activity',name:'Padang Padang Beach',sub:'Kenji tour stop'},
+      {latlng:[-8.7789,115.1165],icon:'🏝️',cat:'activity',name:'Balangan Beach',sub:'Kenji tour stop'},
+      {latlng:[-8.7484,115.1668],icon:'✈️',cat:'transit',name:'Bali Airport (DPS)',sub:'AirAsia arrival 00:35 · Kenji pickup'},
+    ]
+  }
+};
+
+let leafletMap=null;
+
+function destroyMap(){if(leafletMap){try{leafletMap.remove();}catch{}leafletMap=null;}}
+
+function setMapLoc(loc){MAP_LOC=loc;render();}
+
+function renderMaps(){
+  const dests=[
+    {k:'phuket',l:'🟠 Phuket'},
+    {k:'samui',l:'🟢 Samui'},
+    {k:'bali',l:'🟩 Bali'},
+  ];
+  const tabBar=dests.map(d=>{
+    const on=MAP_LOC===d.k;
+    const col=`var(--${d.k})`;
+    return`<button class="bk-tab${on?' bk-tab-on':''}" onclick="setMapLoc('${d.k}')" style="${on?`color:${col};border-bottom-color:${col}`:''}">
+      ${d.l}
+    </button>`;
+  }).join('');
+  const data=MAP_DATA[MAP_LOC];
+  const cats=[
+    {k:'hotel',l:'Hotels',ic:'🏨'},{k:'dental',l:'Dental',ic:'🦷'},
+    {k:'activity',l:'Activities',ic:'🎯'},{k:'food',l:'Eat & drink',ic:'🍽️'},{k:'transit',l:'Transit',ic:'✈️'},
+  ].filter(c=>data.markers.some(m=>m.cat===c.k));
+  const legend=cats.map(c=>`<div class="map-legend-item"><span>${c.ic}</span><span>${c.l}</span></div>`).join('');
+  return`<div id="v-maps">
+    <div class="bk-tabs">${tabBar}</div>
+    <div id="lf-map"></div>
+    <div class="map-legend">${legend}</div>
+  </div>`;
+}
+
+function initMap(){
+  if(VIEW!=='maps')return;
+  const el=document.getElementById('lf-map');
+  if(!el||typeof L==='undefined')return;
+  const data=MAP_DATA[MAP_LOC];
+  if(!data)return;
+  leafletMap=L.map(el,{zoomControl:true,attributionControl:true}).setView(data.center,data.zoom);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    maxZoom:19,
+    attribution:'© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(leafletMap);
+  data.markers.forEach(m=>{
+    const ic=L.divIcon({
+      html:`<div style="font-size:24px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))">${m.icon}</div>`,
+      className:'',iconSize:[28,28],iconAnchor:[14,14],popupAnchor:[0,-14]
+    });
+    L.marker(m.latlng,{icon:ic,title:m.name}).addTo(leafletMap)
+     .bindPopup(`<strong>${m.icon} ${m.name}</strong><span>${m.sub||''}</span>`,{maxWidth:220});
+  });
+}
+
+/* ══════════════════════════════════════
    RENDER
 ══════════════════════════════════════ */
 function render(){
+  destroyMap();
   const vc=document.getElementById('vc');
   if(!vc)return;
   if(VIEW==='today')vc.innerHTML=renderToday();
   else if(VIEW==='trip')vc.innerHTML=renderTrip();
   else if(VIEW==='bookings')vc.innerHTML=renderBookings();
+  else if(VIEW==='maps'){vc.innerHTML=renderMaps();requestAnimationFrame(initMap);}
   else vc.innerHTML=renderOptions();
 
   // Scroll selected day pill into view
