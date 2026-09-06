@@ -4,10 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap">
 <style>
-/* Leaflet 1.9.4 CSS — inlined for CSP compliance */
-.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:0 0}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer,.leaflet-container .leaflet-tile{max-width:none!important;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-animated{will-change:transform}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-popup-pane,.leaflet-control{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a.leaflet-active{outline:2px solid orange}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:Helvetica Neue,Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:black}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:hover,.leaflet-bar a:focus{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in{font-size:22px}.leaflet-touch .leaflet-control-zoom-out{font-size:20px}.leaflet-control-attribution{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover,.leaflet-control-attribution a:focus{text-decoration:underline}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;font-size:11px;white-space:nowrap;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;background:#fff;background:rgba(255,255,255,.5)}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{box-shadow:none}.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper,.leaflet-popup-tip-container{pointer-events:none}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px;pointer-events:auto}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;min-height:1px}.leaflet-popup-content p{margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:white;color:#333;-webkit-box-shadow:0 3px 14px rgba(0,0,0,.4);box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:0 0}.leaflet-container a.leaflet-popup-close-button:hover,.leaflet-container a.leaflet-popup-close-button:focus{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;user-select:none;pointer-events:none;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.4);box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{position:absolute;pointer-events:none;border:6px solid transparent;background:0 0;content:""}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left:before{top:50%;margin-top:-6px;right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{top:50%;margin-top:-6px;left:0;margin-left:-12px;border-right-color:#fff}
-</style>
-<style>
 /* ── tokens ── */
 :root {
   --g:#F7F2EA; --s:#FFFFFF; --s2:#EDE8DF; --b:rgba(0,0,0,.09);
@@ -223,13 +219,19 @@ a{color:inherit;text-decoration:none}
 
 /* ── MAPS view ── */
 #v-maps{display:flex;flex-direction:column;height:100%;overflow:hidden}
-#lf-map{flex:1;min-height:0;position:relative;z-index:0}
+#map-wrap{flex:1;min-height:0;position:relative;background:#7ab8cf;overflow:hidden}
+#map-svg{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#map-svg:active{cursor:grabbing}
 .map-legend{padding:7px 14px;background:var(--s);border-top:1px solid var(--b);display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;flex-shrink:0;align-items:center}
 .map-legend::-webkit-scrollbar{display:none}
 .map-legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--t2);white-space:nowrap;flex-shrink:0}
-.leaflet-popup-content{font-family:var(--ff);font-size:13px;line-height:1.45;min-width:140px}
-.leaflet-popup-content strong{font-size:14px;font-weight:600;color:#1a1410;display:block;margin-bottom:3px}
-.leaflet-popup-content span{font-size:12px;color:#5c5248}
+.map-zoom-btns{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:4px;z-index:10}
+.map-zoom-btn{width:34px;height:34px;border-radius:8px;border:none;background:var(--s);color:var(--t);font-size:20px;line-height:1;cursor:pointer;box-shadow:0 1px 6px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-weight:600}
+#map-popup{position:absolute;background:var(--s);border-radius:12px;padding:10px 13px;box-shadow:0 2px 12px rgba(0,0,0,.25);max-width:210px;z-index:20;pointer-events:none;opacity:0;transition:opacity .15s}
+#map-popup.vis{opacity:1;pointer-events:auto}
+#map-popup strong{font-size:13px;font-weight:600;color:var(--t);display:block;margin-bottom:2px}
+#map-popup span{font-size:11px;color:var(--t2);line-height:1.35;display:block}
+#map-popup-close{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--t3);font-size:16px;cursor:pointer;line-height:1;padding:2px}
 </style>
 
 <div id="app">
@@ -258,7 +260,6 @@ a{color:inherit;text-decoration:none}
 </div>
 <div id="modal"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 'use strict';
 /* ══════════════════════════════════════
@@ -1022,73 +1023,103 @@ const MAP_DATA={
   }
 };
 
-/* Island coastlines — CSP-safe, no external requests */
-const LAND_POLYGONS={
+/* ── SVG Map: coastline polygons ── */
+const COASTLINES={
   phuket:[
-    // Main Phuket island — 34 pts clockwise from Sarasin Bridge (N tip)
-    [
-      [8.131,98.300],[8.117,98.316],[8.103,98.337],[8.066,98.373],
-      [8.035,98.402],[8.007,98.422],[7.980,98.431],[7.960,98.435],
-      [7.938,98.427],[7.906,98.419],[7.880,98.411],[7.848,98.404],
-      [7.815,98.392],[7.784,98.372],[7.768,98.351],[7.749,98.332],
-      [7.733,98.310],[7.727,98.297],[7.724,98.285],[7.736,98.278],
-      [7.764,98.281],[7.796,98.284],[7.821,98.285],[7.847,98.286],
-      [7.872,98.280],[7.892,98.280],[7.912,98.278],[7.937,98.273],
-      [7.963,98.272],[7.995,98.276],[8.025,98.278],[8.058,98.284],
-      [8.084,98.288],[8.112,98.292],[8.131,98.300]
-    ],
-    // Koh He (Coral Island) — small island SE of Phuket
-    [[7.762,98.381],[7.758,98.386],[7.752,98.385],[7.750,98.379],[7.756,98.375],[7.762,98.381]],
-    // Koh Lone
-    [[7.821,98.424],[7.816,98.428],[7.811,98.425],[7.814,98.420],[7.820,98.421],[7.821,98.424]],
+    // Main island — 50 pts traced from accurate coastline
+    [[8.131,98.300],[8.120,98.308],[8.108,98.320],[8.096,98.330],[8.081,98.347],[8.066,98.362],[8.053,98.376],[8.038,98.390],[8.021,98.403],[8.005,98.413],[7.989,98.421],[7.972,98.428],[7.956,98.433],[7.940,98.432],[7.923,98.428],[7.907,98.422],[7.891,98.416],[7.874,98.409],[7.858,98.403],[7.842,98.399],[7.825,98.395],[7.808,98.389],[7.792,98.381],[7.777,98.369],[7.763,98.356],[7.750,98.343],[7.738,98.328],[7.729,98.313],[7.724,98.299],[7.722,98.286],[7.727,98.277],[7.737,98.272],[7.750,98.270],[7.766,98.271],[7.783,98.273],[7.800,98.276],[7.817,98.277],[7.834,98.279],[7.851,98.279],[7.869,98.278],[7.887,98.277],[7.906,98.276],[7.925,98.274],[7.944,98.272],[7.963,98.272],[7.982,98.274],[8.001,98.276],[8.022,98.279],[8.044,98.283],[8.067,98.287],[8.089,98.290],[8.110,98.294],[8.131,98.300]],
+    // Koh He
+    [[7.762,98.381],[7.758,98.387],[7.752,98.386],[7.749,98.380],[7.754,98.374],[7.761,98.375],[7.762,98.381]],
+    // Koh Lon
+    [[7.822,98.424],[7.816,98.430],[7.810,98.426],[7.812,98.419],[7.819,98.419],[7.822,98.424]],
   ],
   samui:[
-    // Main Koh Samui — 18 pts clockwise
-    [
-      [9.601,99.952],[9.619,99.990],[9.622,100.034],[9.598,100.074],
-      [9.577,100.098],[9.540,100.114],[9.507,100.114],[9.471,100.095],
-      [9.448,100.067],[9.427,100.030],[9.415,99.984],[9.419,99.948],
-      [9.435,99.912],[9.461,99.885],[9.490,99.874],[9.522,99.878],
-      [9.555,99.898],[9.581,99.924],[9.601,99.952]
-    ],
-    // Koh Tan (Pig Island) — S of Samui
-    [[9.452,100.016],[9.443,100.025],[9.436,100.022],[9.433,100.013],[9.438,100.006],[9.447,100.006],[9.452,100.016]],
+    [[9.601,99.952],[9.613,99.967],[9.621,99.985],[9.624,100.006],[9.622,100.027],[9.614,100.047],[9.601,100.063],[9.584,100.078],[9.566,100.090],[9.545,100.098],[9.522,100.104],[9.500,100.106],[9.477,100.103],[9.456,100.095],[9.439,100.082],[9.426,100.065],[9.417,100.046],[9.413,100.026],[9.413,100.005],[9.416,99.984],[9.422,99.964],[9.431,99.945],[9.443,99.928],[9.456,99.912],[9.470,99.899],[9.485,99.888],[9.501,99.881],[9.517,99.879],[9.534,99.881],[9.550,99.887],[9.566,99.898],[9.580,99.912],[9.591,99.928],[9.599,99.940],[9.601,99.952]],
+    // Koh Tan
+    [[9.452,100.017],[9.444,100.026],[9.437,100.023],[9.433,100.014],[9.438,100.007],[9.448,100.006],[9.452,100.017]],
   ],
   bali:[
-    // Full Bali island — 22 pts simplified (provides context)
-    [
-      [-8.063,114.446],[-7.993,114.497],[-7.916,114.561],[-7.884,114.604],
-      [-7.867,114.720],[-7.908,114.794],[-7.969,114.857],[-7.931,114.985],
-      [-7.904,115.098],[-7.932,115.194],[-8.015,115.296],[-8.037,115.441],
-      [-7.963,115.571],[-7.893,115.671],[-8.030,115.716],[-8.200,115.671],
-      [-8.303,115.555],[-8.339,115.474],[-8.413,115.419],[-8.453,115.348],
-      [-8.424,114.930],[-8.287,114.800],[-8.151,114.664],[-8.063,114.446]
-    ],
-    // Bukit Peninsula — 19 pts (detailed for zoom-13 view of SW Bali)
-    [
-      [-8.775,115.155],[-8.760,115.178],[-8.769,115.213],
-      [-8.800,115.236],[-8.836,115.233],[-8.858,115.218],
-      [-8.872,115.196],[-8.876,115.162],[-8.863,115.131],
-      [-8.847,115.105],[-8.836,115.088],[-8.827,115.084],
-      [-8.818,115.087],[-8.806,115.090],[-8.791,115.097],
-      [-8.779,115.107],[-8.774,115.122],[-8.768,115.144],
-      [-8.775,115.155]
-    ],
+    // Bukit Peninsula (main view area for our markers)
+    [[-8.742,115.081],[-8.749,115.097],[-8.762,115.112],[-8.774,115.126],[-8.778,115.144],[-8.773,115.159],[-8.763,115.177],[-8.766,115.196],[-8.778,115.214],[-8.800,115.231],[-8.825,115.237],[-8.849,115.228],[-8.864,115.210],[-8.874,115.190],[-8.876,115.166],[-8.867,115.143],[-8.852,115.121],[-8.837,115.101],[-8.822,115.088],[-8.806,115.082],[-8.789,115.083],[-8.770,115.085],[-8.753,115.082],[-8.742,115.081]],
+    // South Bali mainland coast (context shape north of Bukit)
+    [[-8.630,115.044],[-8.640,115.060],[-8.655,115.075],[-8.675,115.085],[-8.700,115.088],[-8.725,115.083],[-8.742,115.081],[-8.753,115.082],[-8.770,115.085],[-8.789,115.083],[-8.806,115.082],[-8.822,115.088],[-8.780,115.090],[-8.760,115.091],[-8.740,115.090],[-8.718,115.088],[-8.695,115.088],[-8.672,115.085],[-8.650,115.080],[-8.634,115.070],[-8.625,115.057],[-8.620,115.043],[-8.622,115.030],[-8.630,115.044]],
   ]
 };
 
-let leafletMap=null;
+/* Map bounding boxes and labels per destination */
+const MAP_CONFIG={
+  phuket:{
+    bbox:{minLat:7.69,maxLat:8.16,minLng:98.21,maxLng:98.52},
+    vw:380,vh:680,
+    labels:[
+      {lat:7.898,lng:98.297,text:'Patong Beach',anchor:'end',dx:-6,dy:0},
+      {lat:8.028,lng:98.279,text:'Bang Tao',anchor:'end',dx:-6,dy:0},
+      {lat:7.856,lng:98.299,text:'Karon',anchor:'end',dx:-6,dy:0},
+      {lat:7.836,lng:98.303,text:'Kata',anchor:'end',dx:-6,dy:0},
+      {lat:7.832,lng:98.316,text:'Big Buddha',anchor:'start',dx:6,dy:0},
+      {lat:7.888,lng:98.392,text:'Phuket Old Town',anchor:'start',dx:6,dy:0},
+      {lat:7.960,lng:98.338,text:'Kathu',anchor:'start',dx:6,dy:0},
+      {lat:8.131,lng:98.312,text:'Sarasin Bridge',anchor:'start',dx:6,dy:0},
+      {lat:7.915,lng:98.278,text:'Kamala',anchor:'end',dx:-6,dy:0},
+    ]
+  },
+  samui:{
+    bbox:{minLat:9.33,maxLat:9.66,minLng:99.82,maxLng:100.18},
+    vw:380,vh:460,
+    labels:[
+      {lat:9.528,lng:100.062,text:'Chaweng Beach',anchor:'start',dx:6,dy:0},
+      {lat:9.470,lng:100.082,text:'Lamai Beach',anchor:'start',dx:6,dy:0},
+      {lat:9.561,lng:99.967,text:'Maenam',anchor:'end',dx:-6,dy:0},
+      {lat:9.545,lng:99.943,text:'Bophut',anchor:'end',dx:-6,dy:0},
+      {lat:9.380,lng:99.978,text:'Thong Krut',anchor:'end',dx:-6,dy:0},
+      {lat:9.443,lng:100.018,text:'Koh Tan',anchor:'start',dx:6,dy:4},
+    ]
+  },
+  bali:{
+    bbox:{minLat:-8.92,maxLat:-8.72,minLng:115.04,maxLng:115.28},
+    vw:380,vh:460,
+    labels:[
+      {lat:-8.830,lng:115.084,text:'Uluwatu',anchor:'end',dx:-6,dy:0},
+      {lat:-8.800,lng:115.114,text:'Bingin',anchor:'end',dx:-6,dy:0},
+      {lat:-8.809,lng:115.109,text:'Padang Padang',anchor:'end',dx:-6,dy:0},
+      {lat:-8.779,lng:115.119,text:'Dreamland',anchor:'start',dx:6,dy:0},
+      {lat:-8.749,lng:115.169,text:'Balangan',anchor:'start',dx:6,dy:0},
+      {lat:-8.748,lng:115.168,text:'Airport DPS →',anchor:'start',dx:6,dy:14},
+    ]
+  }
+};
 
-function destroyMap(){if(leafletMap){try{leafletMap.remove();}catch{}leafletMap=null;}}
+/* Mercator projection — maps lat/lng to SVG x/y */
+function mkProject(cfg){
+  const {bbox,vw,vh}=cfg;
+  const toRad=d=>d*Math.PI/180;
+  const merc=lat=>Math.log(Math.tan(Math.PI/4+toRad(lat)/2));
+  const minM=merc(bbox.minLat),maxM=merc(bbox.maxLat);
+  return function(lat,lng){
+    const x=(lng-bbox.minLng)/(bbox.maxLng-bbox.minLng)*vw;
+    const y=(maxM-merc(lat))/(maxM-minM)*vh;
+    return [x,y];
+  };
+}
+
+let svgPz={s:1,tx:0,ty:0};
+
+function applyPz(g,vw,vh){
+  const minS=0.7,maxS=8;
+  svgPz.s=Math.max(minS,Math.min(maxS,svgPz.s));
+  // Clamp translation so map doesn't go fully offscreen
+  const pad=40;
+  svgPz.tx=Math.max(-vw*svgPz.s+pad,Math.min(vw-pad,svgPz.tx));
+  svgPz.ty=Math.max(-vh*svgPz.s+pad,Math.min(vh-pad,svgPz.ty));
+  g.setAttribute('transform',`translate(${svgPz.tx} ${svgPz.ty}) scale(${svgPz.s})`);
+}
+
+function destroyMap(){}
 
 function setMapLoc(loc){MAP_LOC=loc;render();}
 
 function renderMaps(){
-  const dests=[
-    {k:'phuket',l:'🟠 Phuket'},
-    {k:'samui',l:'🟢 Samui'},
-    {k:'bali',l:'🟩 Bali'},
-  ];
+  const dests=[{k:'phuket',l:'🟠 Phuket'},{k:'samui',l:'🟢 Samui'},{k:'bali',l:'🟩 Bali'}];
   const tabBar=dests.map(d=>{
     const on=MAP_LOC===d.k;
     const col=`var(--${d.k})`;
@@ -1104,46 +1135,195 @@ function renderMaps(){
   const legend=cats.map(c=>`<div class="map-legend-item"><span>${c.ic}</span><span>${c.l}</span></div>`).join('');
   return`<div id="v-maps">
     <div class="bk-tabs">${tabBar}</div>
-    <div id="lf-map"></div>
+    <div id="map-wrap">
+      <svg id="map-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="map-zoom-btns">
+        <button class="map-zoom-btn" onclick="mapZoom(1.4)" aria-label="Zoom in">+</button>
+        <button class="map-zoom-btn" onclick="mapZoom(0.714)" aria-label="Zoom out">−</button>
+      </div>
+      <div id="map-popup"><button id="map-popup-close" onclick="closeMapPopup()">×</button><strong id="mp-name"></strong><span id="mp-sub"></span></div>
+    </div>
     <div class="map-legend">${legend}</div>
   </div>`;
 }
 
+function mapZoom(factor){
+  const svg=document.getElementById('map-svg');
+  const cfg=MAP_CONFIG[MAP_LOC];
+  if(!svg||!cfg)return;
+  const r=svg.getBoundingClientRect();
+  const cx=r.width/2, cy=r.height/2;
+  const pxPerSvg=r.width/cfg.vw;
+  const spx=cx/pxPerSvg, spy=cy/pxPerSvg;
+  const ns=svgPz.s*factor;
+  svgPz.tx=spx+(svgPz.tx-spx)*(ns/svgPz.s);
+  svgPz.ty=spy+(svgPz.ty-spy)*(ns/svgPz.s);
+  svgPz.s=ns;
+  const g=document.getElementById('mpz');
+  if(g)applyPz(g,cfg.vw,cfg.vh);
+}
+
+function closeMapPopup(){
+  const p=document.getElementById('map-popup');
+  if(p)p.classList.remove('vis');
+}
+
+function showMapPopup(name,sub,x,y,svgEl){
+  const p=document.getElementById('map-popup');
+  const wrap=document.getElementById('map-wrap');
+  if(!p||!wrap)return;
+  document.getElementById('mp-name').textContent=name;
+  document.getElementById('mp-sub').textContent=sub||'';
+  p.classList.add('vis');
+  // Position popup above the tap point
+  const wr=wrap.getBoundingClientRect();
+  const svgR=svgEl.getBoundingClientRect();
+  const rx=(x/svgEl.viewBox.baseVal.width)*svgR.width+svgR.left-wr.left;
+  const ry=(y/svgEl.viewBox.baseVal.height)*svgR.height+svgR.top-wr.top;
+  p.style.left=Math.min(rx-105,wr.width-220)+'px';
+  p.style.top=Math.max(ry-80,10)+'px';
+}
+
 function initMap(){
   if(VIEW!=='maps')return;
-  const el=document.getElementById('lf-map');
-  if(!el||typeof L==='undefined')return;
+  const svg=document.getElementById('map-svg');
+  const cfg=MAP_CONFIG[MAP_LOC];
   const data=MAP_DATA[MAP_LOC];
-  if(!data)return;
-  leafletMap=L.map(el,{zoomControl:true,attributionControl:true}).setView(data.center,data.zoom);
-  // Canvas water tiles — no external fetch, CSP-safe
-  const WaterLayer=L.GridLayer.extend({
-    createTile:function(){
-      const c=document.createElement('canvas');
-      c.width=256;c.height=256;
-      const ctx=c.getContext('2d');
-      const g=ctx.createLinearGradient(0,0,256,256);
-      g.addColorStop(0,'#9ecde0');g.addColorStop(1,'#7ab8cf');
-      ctx.fillStyle=g;ctx.fillRect(0,0,256,256);
-      ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=0.5;
-      for(let i=64;i<256;i+=64){
-        ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,256);ctx.stroke();
-        ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(256,i);ctx.stroke();
-      }
-      return c;
-    }
+  if(!svg||!cfg||!data)return;
+
+  const {vw,vh}=cfg;
+  svg.setAttribute('viewBox',`0 0 ${vw} ${vh}`);
+
+  // Ocean background
+  const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
+  bg.setAttribute('width',vw);bg.setAttribute('height',vh);
+  bg.setAttribute('fill','url(#ocean-grad)');
+  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+  const grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+  grad.id='ocean-grad';grad.setAttribute('x1','0');grad.setAttribute('y1','0');grad.setAttribute('x2','1');grad.setAttribute('y2','1');
+  const s1=document.createElementNS('http://www.w3.org/2000/svg','stop');s1.setAttribute('offset','0');s1.setAttribute('stop-color','#9ecde0');
+  const s2=document.createElementNS('http://www.w3.org/2000/svg','stop');s2.setAttribute('offset','1');s2.setAttribute('stop-color','#6aadca');
+  grad.appendChild(s1);grad.appendChild(s2);defs.appendChild(grad);svg.appendChild(defs);svg.appendChild(bg);
+
+  // Pan/zoom group
+  const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.id='mpz';
+  svgPz={s:1,tx:0,ty:0};
+  applyPz(g,vw,vh);
+  svg.appendChild(g);
+
+  const proj=mkProject(cfg);
+
+  // Land polygons
+  (COASTLINES[MAP_LOC]||[]).forEach(ring=>{
+    const pts=ring.map(([la,ln])=>proj(la,ln).join(',')).join(' ');
+    const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    poly.setAttribute('points',pts);
+    poly.setAttribute('fill','#d4c08a');
+    poly.setAttribute('stroke','#b09a55');
+    poly.setAttribute('stroke-width','0.8');
+    g.appendChild(poly);
   });
-  new WaterLayer({attribution:'Map context © OpenStreetMap contributors'}).addTo(leafletMap);
-  // Land polygons — accurate island coastlines, no external requests
-  const landStyle={fillColor:'#d8c99a',fillOpacity:1,color:'#b0a060',weight:1.5,smoothFactor:1.5};
-  (LAND_POLYGONS[MAP_LOC]||[]).forEach(pts=>L.polygon(pts,landStyle).addTo(leafletMap));
-  data.markers.forEach(m=>{
-    const ic=L.divIcon({
-      html:`<div style="font-size:24px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))">${m.icon}</div>`,
-      className:'',iconSize:[28,28],iconAnchor:[14,14],popupAnchor:[0,-14]
-    });
-    L.marker(m.latlng,{icon:ic,title:m.name}).addTo(leafletMap)
-     .bindPopup(`<strong>${m.icon} ${m.name}</strong><span>${m.sub||''}</span>`,{maxWidth:220});
+
+  // Beach / area labels
+  (cfg.labels||[]).forEach(lbl=>{
+    const [lx,ly]=proj(lbl.lat,lbl.lng);
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',lx+(lbl.dx||0));t.setAttribute('y',ly+(lbl.dy||0));
+    t.setAttribute('text-anchor',lbl.anchor||'middle');
+    t.setAttribute('font-size','5.5');t.setAttribute('font-family','DM Sans,sans-serif');
+    t.setAttribute('font-weight','600');t.setAttribute('fill','rgba(40,28,8,0.72)');
+    t.setAttribute('letter-spacing','0.02em');
+    t.textContent=lbl.text;
+    g.appendChild(t);
+  });
+
+  // Markers
+  data.markers.forEach((m,i)=>{
+    const [mx,my]=proj(m.latlng[0],m.latlng[1]);
+    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx',mx);circle.setAttribute('cy',my);
+    circle.setAttribute('r','5');
+    circle.setAttribute('fill','white');circle.setAttribute('stroke','rgba(0,0,0,.25)');circle.setAttribute('stroke-width','0.5');
+    circle.style.cursor='pointer';
+    const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+    txt.setAttribute('x',mx);txt.setAttribute('y',my+3.5);
+    txt.setAttribute('text-anchor','middle');txt.setAttribute('font-size','6');
+    txt.textContent=m.icon;txt.style.cursor='pointer';
+    const handler=()=>{
+      closeMapPopup();
+      showMapPopup(m.icon+' '+m.name,m.sub,mx,my+8,svg);
+    };
+    circle.addEventListener('click',handler);txt.addEventListener('click',handler);
+    circle.addEventListener('touchend',e=>{e.preventDefault();handler();});
+    txt.addEventListener('touchend',e=>{e.preventDefault();handler();});
+    g.appendChild(circle);g.appendChild(txt);
+  });
+
+  // Pan & pinch-zoom
+  let drag=null,lastDist=null;
+  svg.addEventListener('mousedown',e=>{
+    if(e.button!==0)return;
+    drag={px:e.clientX,py:e.clientY};
+    e.preventDefault();
+  });
+  svg.addEventListener('mousemove',e=>{
+    if(!drag)return;
+    const r=svg.getBoundingClientRect();
+    svgPz.tx+=(e.clientX-drag.px)*vw/r.width;
+    svgPz.ty+=(e.clientY-drag.py)*vh/r.height;
+    drag={px:e.clientX,py:e.clientY};
+    applyPz(g,vw,vh);
+  });
+  svg.addEventListener('mouseup',()=>{drag=null;});
+  svg.addEventListener('mouseleave',()=>{drag=null;});
+  svg.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const factor=e.deltaY<0?1.15:0.87;
+    const r=svg.getBoundingClientRect();
+    const spx=(e.clientX-r.left)*vw/r.width;
+    const spy=(e.clientY-r.top)*vh/r.height;
+    const ns=svgPz.s*factor;
+    svgPz.tx=spx+(svgPz.tx-spx)*(ns/svgPz.s);
+    svgPz.ty=spy+(svgPz.ty-spy)*(ns/svgPz.s);
+    svgPz.s=ns;
+    applyPz(g,vw,vh);
+  },{passive:false});
+  svg.addEventListener('touchstart',e=>{
+    if(e.touches.length===1){drag={px:e.touches[0].clientX,py:e.touches[0].clientY};}
+    else if(e.touches.length===2){
+      const dx=e.touches[0].clientX-e.touches[1].clientX;
+      const dy=e.touches[0].clientY-e.touches[1].clientY;
+      lastDist=Math.hypot(dx,dy);drag=null;
+    }
+    e.preventDefault();
+  },{passive:false});
+  svg.addEventListener('touchmove',e=>{
+    if(e.touches.length===1&&drag){
+      const r=svg.getBoundingClientRect();
+      svgPz.tx+=(e.touches[0].clientX-drag.px)*vw/r.width;
+      svgPz.ty+=(e.touches[0].clientY-drag.py)*vh/r.height;
+      drag={px:e.touches[0].clientX,py:e.touches[0].clientY};
+      applyPz(g,vw,vh);
+    } else if(e.touches.length===2&&lastDist!==null){
+      const dx=e.touches[0].clientX-e.touches[1].clientX;
+      const dy=e.touches[0].clientY-e.touches[1].clientY;
+      const dist=Math.hypot(dx,dy);
+      const factor=dist/lastDist;
+      const r=svg.getBoundingClientRect();
+      const mx=((e.touches[0].clientX+e.touches[1].clientX)/2-r.left)*vw/r.width;
+      const my=((e.touches[0].clientY+e.touches[1].clientY)/2-r.top)*vh/r.height;
+      const ns=svgPz.s*factor;
+      svgPz.tx=mx+(svgPz.tx-mx)*(ns/svgPz.s);
+      svgPz.ty=my+(svgPz.ty-my)*(ns/svgPz.s);
+      svgPz.s=ns;lastDist=dist;
+      applyPz(g,vw,vh);
+    }
+    e.preventDefault();
+  },{passive:false});
+  svg.addEventListener('touchend',e=>{
+    if(e.touches.length===0){drag=null;lastDist=null;}
+    else if(e.touches.length===1){lastDist=null;}
   });
 }
 
