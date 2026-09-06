@@ -1022,6 +1022,39 @@ const MAP_DATA={
   }
 };
 
+/* Simplified island outlines — no external requests (CSP-safe) */
+const LAND_POLYGONS={
+  phuket:[[
+    [8.12,98.30],[8.08,98.34],[8.07,98.40],[8.03,98.43],[7.95,98.45],
+    [7.87,98.43],[7.85,98.42],[7.80,98.40],[7.77,98.38],[7.74,98.34],
+    [7.73,98.31],[7.74,98.27],[7.80,98.26],[7.87,98.25],[7.96,98.26],
+    [8.02,98.28],[8.09,98.28],[8.12,98.30]
+  ]],
+  samui:[[
+    [9.60,99.96],[9.62,100.00],[9.62,100.04],[9.58,100.09],
+    [9.51,100.12],[9.44,100.08],[9.41,100.02],[9.41,99.96],
+    [9.44,99.89],[9.51,99.87],[9.57,99.89],[9.60,99.96]
+  ]],
+  bali:[[
+    [-8.07,114.44],[-8.08,114.51],[-8.11,114.57],[-8.16,114.62],
+    [-8.19,114.66],[-8.20,114.73],[-8.17,114.80],[-8.13,114.85],
+    [-8.07,114.90],[-8.02,114.94],[-7.98,115.00],[-7.96,115.03],
+    [-7.93,115.10],[-7.91,115.14],[-7.90,115.20],[-7.91,115.26],
+    [-7.93,115.31],[-7.97,115.36],[-8.01,115.39],[-8.06,115.44],
+    [-8.10,115.50],[-8.13,115.54],[-8.14,115.58],[-8.13,115.63],
+    [-8.11,115.70],[-8.15,115.72],[-8.19,115.71],[-8.23,115.68],
+    [-8.27,115.65],[-8.30,115.60],[-8.31,115.54],[-8.33,115.50],
+    [-8.36,115.47],[-8.39,115.45],[-8.42,115.42],[-8.44,115.39],
+    [-8.45,115.35],[-8.44,115.31],[-8.42,115.27],[-8.39,115.23],
+    [-8.35,115.20],[-8.33,115.16],[-8.31,115.13],[-8.32,115.09],
+    [-8.36,115.06],[-8.41,115.03],[-8.43,115.00],[-8.44,114.96],
+    [-8.43,114.93],[-8.41,114.89],[-8.38,114.86],[-8.35,114.83],
+    [-8.31,114.80],[-8.27,114.77],[-8.23,114.74],[-8.20,114.72],
+    [-8.17,114.68],[-8.14,114.63],[-8.11,114.57],[-8.08,114.51],
+    [-8.07,114.44]
+  ]]
+};
+
 let leafletMap=null;
 
 function destroyMap(){if(leafletMap){try{leafletMap.remove();}catch{}leafletMap=null;}}
@@ -1061,10 +1094,21 @@ function initMap(){
   const data=MAP_DATA[MAP_LOC];
   if(!data)return;
   leafletMap=L.map(el,{zoomControl:true,attributionControl:true}).setView(data.center,data.zoom);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    maxZoom:19,
-    attribution:'© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(leafletMap);
+  // Canvas water tiles — no external fetch, CSP-safe
+  const WaterLayer=L.GridLayer.extend({
+    createTile:function(){
+      const c=document.createElement('canvas');
+      c.width=256;c.height=256;
+      const ctx=c.getContext('2d');
+      ctx.fillStyle='#b8d8e8';
+      ctx.fillRect(0,0,256,256);
+      return c;
+    }
+  });
+  new WaterLayer({attribution:'Map context © OpenStreetMap contributors'}).addTo(leafletMap);
+  // Land polygons from hardcoded simplified outlines
+  const landStyle={fillColor:'#d4e6b5',fillOpacity:1,color:'#8aad5a',weight:1.5,smoothFactor:1.5};
+  (LAND_POLYGONS[MAP_LOC]||[]).forEach(pts=>L.polygon(pts,landStyle).addTo(leafletMap));
   data.markers.forEach(m=>{
     const ic=L.divIcon({
       html:`<div style="font-size:24px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))">${m.icon}</div>`,
