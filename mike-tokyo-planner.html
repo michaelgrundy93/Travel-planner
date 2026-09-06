@@ -1026,8 +1026,8 @@ const MAP_DATA={
 /* ── SVG Map: coastline polygons ── */
 const COASTLINES={
   phuket:[
-    // Main island — 50 pts traced from accurate coastline
-    [[8.131,98.300],[8.120,98.308],[8.108,98.320],[8.096,98.330],[8.081,98.347],[8.066,98.362],[8.053,98.376],[8.038,98.390],[8.021,98.403],[8.005,98.413],[7.989,98.421],[7.972,98.428],[7.956,98.433],[7.940,98.432],[7.923,98.428],[7.907,98.422],[7.891,98.416],[7.874,98.409],[7.858,98.403],[7.842,98.399],[7.825,98.395],[7.808,98.389],[7.792,98.381],[7.777,98.369],[7.763,98.356],[7.750,98.343],[7.738,98.328],[7.729,98.313],[7.724,98.299],[7.722,98.286],[7.727,98.277],[7.737,98.272],[7.750,98.270],[7.766,98.271],[7.783,98.273],[7.800,98.276],[7.817,98.277],[7.834,98.279],[7.851,98.279],[7.869,98.278],[7.887,98.277],[7.906,98.276],[7.925,98.274],[7.944,98.272],[7.963,98.272],[7.982,98.274],[8.001,98.276],[8.022,98.279],[8.044,98.283],[8.067,98.287],[8.089,98.290],[8.110,98.294],[8.131,98.300]],
+    // Main island — more detailed, accurate south peninsula with Promthep Cape
+    [[8.131,98.300],[8.120,98.310],[8.105,98.318],[8.090,98.338],[8.072,98.360],[8.053,98.382],[8.032,98.402],[8.010,98.415],[7.990,98.424],[7.968,98.431],[7.948,98.435],[7.928,98.433],[7.908,98.426],[7.890,98.420],[7.870,98.415],[7.850,98.415],[7.840,98.420],[7.830,98.428],[7.820,98.422],[7.808,98.408],[7.797,98.394],[7.785,98.378],[7.778,98.362],[7.773,98.346],[7.769,98.332],[7.762,98.318],[7.757,98.308],[7.751,98.297],[7.748,98.284],[7.754,98.272],[7.762,98.265],[7.773,98.264],[7.785,98.266],[7.800,98.268],[7.818,98.270],[7.836,98.272],[7.854,98.272],[7.872,98.271],[7.892,98.271],[7.912,98.270],[7.930,98.270],[7.948,98.270],[7.966,98.270],[7.984,98.272],[8.003,98.274],[8.023,98.277],[8.046,98.281],[8.070,98.284],[8.092,98.288],[8.113,98.293],[8.131,98.300]],
     // Koh He
     [[7.762,98.381],[7.758,98.387],[7.752,98.386],[7.749,98.380],[7.754,98.374],[7.761,98.375],[7.762,98.381]],
     // Koh Lon
@@ -1035,14 +1035,54 @@ const COASTLINES={
   ],
   samui:[
     [[9.601,99.952],[9.613,99.967],[9.621,99.985],[9.624,100.006],[9.622,100.027],[9.614,100.047],[9.601,100.063],[9.584,100.078],[9.566,100.090],[9.545,100.098],[9.522,100.104],[9.500,100.106],[9.477,100.103],[9.456,100.095],[9.439,100.082],[9.426,100.065],[9.417,100.046],[9.413,100.026],[9.413,100.005],[9.416,99.984],[9.422,99.964],[9.431,99.945],[9.443,99.928],[9.456,99.912],[9.470,99.899],[9.485,99.888],[9.501,99.881],[9.517,99.879],[9.534,99.881],[9.550,99.887],[9.566,99.898],[9.580,99.912],[9.591,99.928],[9.599,99.940],[9.601,99.952]],
-    // Koh Tan
     [[9.452,100.017],[9.444,100.026],[9.437,100.023],[9.433,100.014],[9.438,100.007],[9.448,100.006],[9.452,100.017]],
   ],
   bali:[
-    // Bukit Peninsula (main view area for our markers)
     [[-8.742,115.081],[-8.749,115.097],[-8.762,115.112],[-8.774,115.126],[-8.778,115.144],[-8.773,115.159],[-8.763,115.177],[-8.766,115.196],[-8.778,115.214],[-8.800,115.231],[-8.825,115.237],[-8.849,115.228],[-8.864,115.210],[-8.874,115.190],[-8.876,115.166],[-8.867,115.143],[-8.852,115.121],[-8.837,115.101],[-8.822,115.088],[-8.806,115.082],[-8.789,115.083],[-8.770,115.085],[-8.753,115.082],[-8.742,115.081]],
-    // South Bali mainland coast (context shape north of Bukit)
-    [[-8.630,115.044],[-8.640,115.060],[-8.655,115.075],[-8.675,115.085],[-8.700,115.088],[-8.725,115.083],[-8.742,115.081],[-8.753,115.082],[-8.770,115.085],[-8.789,115.083],[-8.806,115.082],[-8.822,115.088],[-8.780,115.090],[-8.760,115.091],[-8.740,115.090],[-8.718,115.088],[-8.695,115.088],[-8.672,115.085],[-8.650,115.080],[-8.634,115.070],[-8.625,115.057],[-8.620,115.043],[-8.622,115.030],[-8.630,115.044]],
+    [[-8.630,115.044],[-8.640,115.060],[-8.655,115.075],[-8.675,115.085],[-8.700,115.088],[-8.725,115.083],[-8.742,115.081],[-8.753,115.082],[-8.770,115.085],[-8.789,115.083],[-8.806,115.082],[-8.780,115.090],[-8.760,115.091],[-8.740,115.090],[-8.718,115.088],[-8.695,115.088],[-8.672,115.085],[-8.650,115.080],[-8.634,115.070],[-8.625,115.057],[-8.620,115.043],[-8.622,115.030],[-8.630,115.044]],
+  ]
+};
+
+/* Road networks as lat/lng waypoint arrays */
+const ROADS={
+  phuket:[
+    {w:1.6,pts:[[8.131,98.300],[8.108,98.296],[8.083,98.291],[8.060,98.296],[8.040,98.308],[8.027,98.341],[8.006,98.339],[7.986,98.338],[7.965,98.337],[7.944,98.336],[7.921,98.330],[7.908,98.322],[7.892,98.314],[7.874,98.350],[7.855,98.362],[7.836,98.368],[7.820,98.358],[7.805,98.349],[7.784,98.330],[7.768,98.338],[7.758,98.320],[7.751,98.297]]},
+    {w:1.0,pts:[[8.105,98.291],[8.080,98.281],[8.055,98.277],[8.028,98.279],[8.000,98.276],[7.975,98.277],[7.952,98.277],[7.930,98.279],[7.916,98.282],[7.898,98.298]]},
+    {w:1.0,pts:[[7.898,98.298],[7.906,98.318],[7.912,98.336]]},
+    {w:1.0,pts:[[7.898,98.298],[7.870,98.298],[7.856,98.301],[7.840,98.303],[7.823,98.304],[7.804,98.304],[7.785,98.302],[7.763,98.276],[7.751,98.297]]},
+    {w:0.9,pts:[[7.888,98.392],[7.871,98.372],[7.855,98.362]]},
+    {w:0.9,pts:[[7.888,98.392],[7.868,98.410],[7.852,98.416]]},
+    {w:0.9,pts:[[7.836,98.368],[7.815,98.395],[7.827,98.428]]},
+  ],
+  samui:[
+    {w:1.3,pts:[[9.528,100.063],[9.548,100.068],[9.562,100.055],[9.574,100.037],[9.579,100.017],[9.575,99.997],[9.564,99.977],[9.549,99.959],[9.540,99.942],[9.526,99.928],[9.510,99.919],[9.492,99.913],[9.475,99.918],[9.459,99.930],[9.446,99.944],[9.439,99.960],[9.437,99.979],[9.440,99.999],[9.447,100.018],[9.458,100.036],[9.472,100.052],[9.488,100.063],[9.507,100.070],[9.521,100.068],[9.528,100.063]]},
+    {w:0.9,pts:[[9.532,99.882],[9.530,99.910],[9.528,99.940],[9.516,99.960],[9.504,99.975]]},
+  ],
+  bali:[
+    {w:1.3,pts:[[-8.742,115.081],[-8.753,115.094],[-8.762,115.108],[-8.770,115.124],[-8.776,115.143],[-8.784,115.162],[-8.797,115.182],[-8.812,115.201],[-8.828,115.220]]},
+    {w:1.0,pts:[[-8.762,115.108],[-8.776,115.099],[-8.791,115.091],[-8.806,115.086],[-8.820,115.084],[-8.829,115.085]]},
+    {w:0.8,pts:[[-8.762,115.108],[-8.778,115.111],[-8.793,115.111],[-8.808,115.110]]},
+    {w:0.8,pts:[[-8.753,115.094],[-8.762,115.096],[-8.771,115.097]]},
+  ]
+};
+
+/* Static landmark icons shown on every map */
+const LANDMARKS={
+  phuket:[
+    {lat:8.097,lng:98.301,icon:'✈',sub:'Airport',anc:'end',dx:-3,dy:0},
+    {lat:7.831,lng:98.354,icon:'🛕',sub:'Big Buddha',anc:'start',dx:3,dy:0},
+    {lat:7.836,lng:98.371,icon:'⛩',sub:'Wat Chalong',anc:'start',dx:3,dy:0},
+    {lat:7.755,lng:98.303,icon:'★',sub:'Promthep Cape',anc:'end',dx:-3,dy:0},
+    {lat:8.027,lng:98.341,icon:'◉',sub:'Heroines Mon.',anc:'start',dx:3,dy:0},
+  ],
+  samui:[
+    {lat:9.551,lng:100.061,icon:'✈',sub:'Airport',anc:'start',dx:3,dy:0},
+    {lat:9.531,lng:99.873,icon:'◉',sub:'Nathon',anc:'end',dx:-3,dy:0},
+  ],
+  bali:[
+    {lat:-8.748,lng:115.169,icon:'✈',sub:'Airport DPS',anc:'start',dx:3,dy:0},
+    {lat:-8.829,lng:115.085,icon:'🛕',sub:'Uluwatu Temple',anc:'end',dx:-3,dy:0},
+    {lat:-8.800,lng:115.231,icon:'★',sub:'Nusa Dua',anc:'start',dx:3,dy:0},
   ]
 };
 
@@ -1052,39 +1092,45 @@ const MAP_CONFIG={
     bbox:{minLat:7.69,maxLat:8.16,minLng:98.21,maxLng:98.52},
     vw:380,vh:680,
     labels:[
-      {lat:7.898,lng:98.297,text:'Patong Beach',anchor:'end',dx:-6,dy:0},
-      {lat:8.028,lng:98.279,text:'Bang Tao',anchor:'end',dx:-6,dy:0},
-      {lat:7.856,lng:98.299,text:'Karon',anchor:'end',dx:-6,dy:0},
-      {lat:7.836,lng:98.303,text:'Kata',anchor:'end',dx:-6,dy:0},
-      {lat:7.832,lng:98.316,text:'Big Buddha',anchor:'start',dx:6,dy:0},
-      {lat:7.888,lng:98.392,text:'Phuket Old Town',anchor:'start',dx:6,dy:0},
-      {lat:7.960,lng:98.338,text:'Kathu',anchor:'start',dx:6,dy:0},
-      {lat:8.131,lng:98.312,text:'Sarasin Bridge',anchor:'start',dx:6,dy:0},
-      {lat:7.915,lng:98.278,text:'Kamala',anchor:'end',dx:-6,dy:0},
+      {lat:8.131,lng:98.300,text:'Sarasin Bridge',anc:'end',dx:-8,dy:0,sz:5,wt:'600'},
+      {lat:8.099,lng:98.278,text:'Mai Khao',anc:'end',dx:-8,dy:0,sz:5.5,wt:'600'},
+      {lat:8.028,lng:98.277,text:'Bang Tao',anc:'end',dx:-8,dy:0,sz:5.5,wt:'700'},
+      {lat:7.972,lng:98.276,text:'Surin',anc:'end',dx:-8,dy:0,sz:5.5,wt:'600'},
+      {lat:7.928,lng:98.276,text:'Kamala',anc:'end',dx:-8,dy:0,sz:5.5,wt:'600'},
+      {lat:7.897,lng:98.295,text:'Patong',anc:'end',dx:-8,dy:0,sz:7,wt:'800'},
+      {lat:7.856,lng:98.299,text:'Karon',anc:'end',dx:-8,dy:0,sz:6,wt:'700'},
+      {lat:7.836,lng:98.300,text:'Kata',anc:'end',dx:-8,dy:0,sz:6,wt:'700'},
+      {lat:7.800,lng:98.296,text:'Nai Harn',anc:'end',dx:-8,dy:0,sz:5.5,wt:'600'},
+      {lat:7.784,lng:98.332,text:'Rawai',anc:'start',dx:7,dy:0,sz:5.5,wt:'600'},
+      {lat:7.888,lng:98.393,text:'Phuket Town',anc:'start',dx:7,dy:0,sz:6,wt:'700'},
+      {lat:7.836,lng:98.367,text:'Chalong',anc:'start',dx:7,dy:0,sz:5.5,wt:'600'},
+      {lat:7.827,lng:98.428,text:'Cape Panwa',anc:'start',dx:7,dy:0,sz:5,wt:'600'},
     ]
   },
   samui:{
     bbox:{minLat:9.33,maxLat:9.66,minLng:99.82,maxLng:100.18},
     vw:380,vh:460,
     labels:[
-      {lat:9.528,lng:100.062,text:'Chaweng Beach',anchor:'start',dx:6,dy:0},
-      {lat:9.470,lng:100.082,text:'Lamai Beach',anchor:'start',dx:6,dy:0},
-      {lat:9.561,lng:99.967,text:'Maenam',anchor:'end',dx:-6,dy:0},
-      {lat:9.545,lng:99.943,text:'Bophut',anchor:'end',dx:-6,dy:0},
-      {lat:9.380,lng:99.978,text:'Thong Krut',anchor:'end',dx:-6,dy:0},
-      {lat:9.443,lng:100.018,text:'Koh Tan',anchor:'start',dx:6,dy:4},
+      {lat:9.528,lng:100.063,text:'Chaweng',anc:'start',dx:7,dy:0,sz:7,wt:'800'},
+      {lat:9.467,lng:100.073,text:'Lamai',anc:'start',dx:7,dy:0,sz:6.5,wt:'700'},
+      {lat:9.562,lng:100.001,text:'Maenam',anc:'end',dx:-7,dy:0,sz:5.5,wt:'600'},
+      {lat:9.543,lng:99.943,text:'Bophut',anc:'end',dx:-7,dy:0,sz:5.5,wt:'600'},
+      {lat:9.380,lng:99.967,text:'Thong Krut',anc:'end',dx:-7,dy:0,sz:5,wt:'500'},
+      {lat:9.443,lng:100.018,text:'Koh Tan',anc:'start',dx:7,dy:4,sz:5,wt:'500'},
+      {lat:9.531,lng:99.869,text:'Nathon',anc:'end',dx:-7,dy:0,sz:5.5,wt:'600'},
     ]
   },
   bali:{
     bbox:{minLat:-8.92,maxLat:-8.72,minLng:115.04,maxLng:115.28},
     vw:380,vh:460,
     labels:[
-      {lat:-8.830,lng:115.084,text:'Uluwatu',anchor:'end',dx:-6,dy:0},
-      {lat:-8.800,lng:115.114,text:'Bingin',anchor:'end',dx:-6,dy:0},
-      {lat:-8.809,lng:115.109,text:'Padang Padang',anchor:'end',dx:-6,dy:0},
-      {lat:-8.779,lng:115.119,text:'Dreamland',anchor:'start',dx:6,dy:0},
-      {lat:-8.749,lng:115.169,text:'Balangan',anchor:'start',dx:6,dy:0},
-      {lat:-8.748,lng:115.168,text:'Airport DPS →',anchor:'start',dx:6,dy:14},
+      {lat:-8.829,lng:115.086,text:'Uluwatu',anc:'end',dx:-7,dy:0,sz:6.5,wt:'700'},
+      {lat:-8.800,lng:115.111,text:'Bingin',anc:'end',dx:-7,dy:0,sz:5.5,wt:'600'},
+      {lat:-8.810,lng:115.107,text:'Padang Padang',anc:'end',dx:-7,dy:-8,sz:5,wt:'600'},
+      {lat:-8.779,lng:115.108,text:'Dreamland',anc:'end',dx:-7,dy:0,sz:5.5,wt:'600'},
+      {lat:-8.770,lng:115.096,text:'Balangan',anc:'end',dx:-7,dy:-7,sz:5,wt:'600'},
+      {lat:-8.800,lng:115.230,text:'Nusa Dua',anc:'start',dx:7,dy:0,sz:5.5,wt:'600'},
+      {lat:-8.710,lng:115.160,text:'Seminyak / Kuta',anc:'start',dx:7,dy:0,sz:5,wt:'500'},
     ]
   }
 };
@@ -1107,7 +1153,6 @@ let svgPz={s:1,tx:0,ty:0};
 function applyPz(g,vw,vh){
   const minS=0.7,maxS=8;
   svgPz.s=Math.max(minS,Math.min(maxS,svgPz.s));
-  // Clamp translation so map doesn't go fully offscreen
   const pad=40;
   svgPz.tx=Math.max(-vw*svgPz.s+pad,Math.min(vw-pad,svgPz.tx));
   svgPz.ty=Math.max(-vh*svgPz.s+pad,Math.min(vh-pad,svgPz.ty));
@@ -1194,71 +1239,109 @@ function initMap(){
   const {vw,vh}=cfg;
   svg.setAttribute('viewBox',`0 0 ${vw} ${vh}`);
 
+  // SVG element helper
+  const ns='http://www.w3.org/2000/svg';
+  function mk(tag,attrs,parent){
+    const el=document.createElementNS(ns,tag);
+    Object.entries(attrs||{}).forEach(([k,v])=>el.setAttribute(k,String(v)));
+    if(parent)parent.appendChild(el);
+    return el;
+  }
+
+  // Defs: ocean gradient + drop shadow filter for markers
+  const defs=mk('defs',{},svg);
+  const og=mk('linearGradient',{id:'og',x1:0,y1:0,x2:1,y2:1},defs);
+  mk('stop',{offset:0,'stop-color':'#7ec8e3'},og);
+  mk('stop',{offset:1,'stop-color':'#4aa8cc'},og);
+  const lg=mk('radialGradient',{id:'lg',cx:'50%',cy:'30%',r:'60%'},defs);
+  mk('stop',{offset:0,'stop-color':'#6ac068'},lg);
+  mk('stop',{offset:1,'stop-color':'#3d8840'},lg);
+  const filt=mk('filter',{id:'ds',x:'-20%',y:'-20%',width:'140%',height:'140%'},defs);
+  mk('feDropShadow',{dx:0,dy:1,stdDeviation:1.5,'flood-color':'rgba(0,0,0,0.4)'},filt);
+
   // Ocean background
-  const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
-  bg.setAttribute('width',vw);bg.setAttribute('height',vh);
-  bg.setAttribute('fill','url(#ocean-grad)');
-  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
-  const grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
-  grad.id='ocean-grad';grad.setAttribute('x1','0');grad.setAttribute('y1','0');grad.setAttribute('x2','1');grad.setAttribute('y2','1');
-  const s1=document.createElementNS('http://www.w3.org/2000/svg','stop');s1.setAttribute('offset','0');s1.setAttribute('stop-color','#9ecde0');
-  const s2=document.createElementNS('http://www.w3.org/2000/svg','stop');s2.setAttribute('offset','1');s2.setAttribute('stop-color','#6aadca');
-  grad.appendChild(s1);grad.appendChild(s2);defs.appendChild(grad);svg.appendChild(defs);svg.appendChild(bg);
+  mk('rect',{width:vw,height:vh,fill:'url(#og)'},svg);
 
   // Pan/zoom group
-  const g=document.createElementNS('http://www.w3.org/2000/svg','g');
-  g.id='mpz';
+  const g=mk('g',{id:'mpz'},svg);
   svgPz={s:1,tx:0,ty:0};
   applyPz(g,vw,vh);
-  svg.appendChild(g);
 
   const proj=mkProject(cfg);
 
-  // Land polygons
+  // Land polygons — vivid green tourist-map style
   (COASTLINES[MAP_LOC]||[]).forEach(ring=>{
     const pts=ring.map(([la,ln])=>proj(la,ln).join(',')).join(' ');
-    const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
-    poly.setAttribute('points',pts);
-    poly.setAttribute('fill','#d4c08a');
-    poly.setAttribute('stroke','#b09a55');
-    poly.setAttribute('stroke-width','0.8');
-    g.appendChild(poly);
+    mk('polygon',{points:pts,fill:'url(#lg)',stroke:'#2e6e30','stroke-width':1.2,'stroke-linejoin':'round'},g);
   });
 
-  // Beach / area labels
+  // Roads
+  (ROADS[MAP_LOC]||[]).forEach(road=>{
+    const pts=road.pts.map(([la,ln])=>proj(la,ln).join(',')).join(' ');
+    // Road casing (darker outline)
+    mk('polyline',{points:pts,fill:'none',stroke:'#8a7020','stroke-width':road.w+1.2,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+    // Road surface
+    mk('polyline',{points:pts,fill:'none',stroke:'#e8d060','stroke-width':road.w,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  });
+
+  // Static landmark icons
+  (LANDMARKS[MAP_LOC]||[]).forEach(lm=>{
+    const [lx,ly]=proj(lm.lat,lm.lng);
+    const ax=lx+(lm.dx||0), ay=ly+(lm.dy||0);
+    // Icon
+    const ic=mk('text',{x:lx,y:ly+3,'text-anchor':'middle','font-size':8,'font-family':'DM Sans,system-ui,sans-serif'},g);
+    ic.textContent=lm.icon;
+    // Sub-label with halo
+    const halo=mk('text',{x:ax,y:ay+10,'text-anchor':lm.anc||'middle','font-size':4.5,'font-family':'DM Sans,system-ui,sans-serif','font-weight':'600',stroke:'rgba(255,255,255,0.9)','stroke-width':2.5,'stroke-linejoin':'round',fill:'none'},g);
+    halo.textContent=lm.sub;
+    const lbl=mk('text',{x:ax,y:ay+10,'text-anchor':lm.anc||'middle','font-size':4.5,'font-family':'DM Sans,system-ui,sans-serif','font-weight':'600',fill:'rgba(30,18,4,0.85)'},g);
+    lbl.textContent=lm.sub;
+  });
+
+  // Place name labels — with white halo for readability on green
   (cfg.labels||[]).forEach(lbl=>{
     const [lx,ly]=proj(lbl.lat,lbl.lng);
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t.setAttribute('x',lx+(lbl.dx||0));t.setAttribute('y',ly+(lbl.dy||0));
-    t.setAttribute('text-anchor',lbl.anchor||'middle');
-    t.setAttribute('font-size','5.5');t.setAttribute('font-family','DM Sans,sans-serif');
-    t.setAttribute('font-weight','600');t.setAttribute('fill','rgba(40,28,8,0.72)');
-    t.setAttribute('letter-spacing','0.02em');
+    const ax=lx+(lbl.dx||0), ay=ly+(lbl.dy||0);
+    const sz=lbl.sz||5.5, wt=lbl.wt||'600', anc=lbl.anc||'middle';
+    // Halo pass
+    const h=mk('text',{x:ax,y:ay,'text-anchor':anc,'font-size':sz,'font-family':'DM Sans,system-ui,sans-serif','font-weight':wt,'letter-spacing':'0.03em',stroke:'rgba(255,255,255,0.92)','stroke-width':2.8,'stroke-linejoin':'round',fill:'none'},g);
+    h.textContent=lbl.text;
+    // Text pass
+    const t=mk('text',{x:ax,y:ay,'text-anchor':anc,'font-size':sz,'font-family':'DM Sans,system-ui,sans-serif','font-weight':wt,'letter-spacing':'0.03em',fill:'rgba(25,14,2,0.88)'},g);
     t.textContent=lbl.text;
-    g.appendChild(t);
   });
 
-  // Markers
-  data.markers.forEach((m,i)=>{
+  // Cat colours for markers
+  const catClr={hotel:'#E8762A',dental:'#e83030',activity:'#2A9FD6',food:'#16B8B0',transit:'#7B6EC4'};
+
+  // Booking markers (tappable)
+  data.markers.forEach(m=>{
     const [mx,my]=proj(m.latlng[0],m.latlng[1]);
-    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    circle.setAttribute('cx',mx);circle.setAttribute('cy',my);
-    circle.setAttribute('r','5');
-    circle.setAttribute('fill','white');circle.setAttribute('stroke','rgba(0,0,0,.25)');circle.setAttribute('stroke-width','0.5');
-    circle.style.cursor='pointer';
-    const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
-    txt.setAttribute('x',mx);txt.setAttribute('y',my+3.5);
-    txt.setAttribute('text-anchor','middle');txt.setAttribute('font-size','6');
-    txt.textContent=m.icon;txt.style.cursor='pointer';
-    const handler=()=>{
-      closeMapPopup();
-      showMapPopup(m.icon+' '+m.name,m.sub,mx,my+8,svg);
-    };
-    circle.addEventListener('click',handler);txt.addEventListener('click',handler);
-    circle.addEventListener('touchend',e=>{e.preventDefault();handler();});
-    txt.addEventListener('touchend',e=>{e.preventDefault();handler();});
-    g.appendChild(circle);g.appendChild(txt);
+    const clr=catClr[m.cat]||'#555';
+    // Pin shadow
+    mk('circle',{cx:mx+0.8,cy:my+1,'r':6.5,fill:'rgba(0,0,0,0.25)'},g);
+    // Pin body
+    const pin=mk('circle',{cx:mx,cy:my,'r':6.5,fill:clr,stroke:'#fff','stroke-width':1.2,filter:'url(#ds)'},g);
+    // Pin icon
+    const ic=mk('text',{x:mx,y:my+3.8,'text-anchor':'middle','font-size':7,'font-family':'DM Sans,system-ui,sans-serif'},g);
+    ic.textContent=m.icon;
+    pin.style.cursor='pointer';ic.style.cursor='pointer';
+    const handler=()=>{closeMapPopup();showMapPopup(m.icon+' '+m.name,m.sub,mx,my+10,svg);};
+    [pin,ic].forEach(el=>{
+      el.addEventListener('click',handler);
+      el.addEventListener('touchend',e=>{e.preventDefault();handler();});
+    });
   });
+
+  // Compass rose — fixed, outside pan group
+  const cr=mk('g',{transform:`translate(${vw-26},${vh-26})`},svg);
+  mk('circle',{cx:0,cy:0,r:13,fill:'rgba(255,255,255,0.82)',stroke:'rgba(0,0,0,0.18)','stroke-width':0.5},cr);
+  // N arrow (red)
+  mk('path',{d:'M0,-10 L3,0 L0,-3 L-3,0 Z',fill:'#c0392b'},cr);
+  // S arrow (grey)
+  mk('path',{d:'M0,10 L3,0 L0,3 L-3,0 Z',fill:'#aaa'},cr);
+  const nt=mk('text',{x:0,y:-12,'text-anchor':'middle','font-size':5,'font-family':'DM Sans,system-ui,sans-serif','font-weight':'800',fill:'#c0392b'},cr);
+  nt.textContent='N';
 
   // Pan & pinch-zoom
   let drag=null,lastDist=null;
