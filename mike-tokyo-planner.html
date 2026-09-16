@@ -308,8 +308,8 @@ const DAYS=[
   {d:'2026-09-20',lbl:'Sun 20 Sep',day:'Sun',num:'20',loc:'samui', summ:'Pack & check out Amari. Leave ~11:15. Fly 13:45 → Koh Samui 14:40. Check in.',conflicts:[]},
   {d:'2026-09-21',lbl:'Mon 21 Sep',day:'Mon',num:'21',loc:'samui', summ:'Jet ski safari to Pig Island (pending). ~40 min drive each way.',conflicts:['bali-arrival-card']},
   {d:'2026-09-22',lbl:'Tue 22 Sep',day:'Tue',num:'22',loc:'transit',summ:'⚠️ Self-transfer day. Check out 11:30. Fly Samui 15:25 → Phuket 16:25, then 19:40 → Bali.',conflicts:['self-transfer']},
-  {d:'2026-09-23',lbl:'Wed 23 Sep',day:'Wed',num:'23',loc:'bali',  summ:'Arrive Bali 00:35. Surf lesson TBC. Kecak fire dance evening. Kenji driving.',conflicts:[]},
-  {d:'2026-09-24',lbl:'Thu 24 Sep',day:'Thu',num:'24',loc:'bali',  summ:'⚠️ RECONFIRM GOLF TODAY. Free / surf / beach hop. Kenji driving.',conflicts:['golf-reconfirm']},
+  {d:'2026-09-23',lbl:'Wed 23 Sep',day:'Wed',num:'23',loc:'bali',  summ:'Arrive Bali 00:35. Kuta Beach base. Surf lesson TBC. Kecak fire dance evening (Uluwatu ~30 min). Kenji driving.',conflicts:[]},
+  {d:'2026-09-24',lbl:'Thu 24 Sep',day:'Thu',num:'24',loc:'bali',  summ:'⚠️ RECONFIRM GOLF TODAY. Free / surf / Kuta beach hop. Kenji driving.',conflicts:['golf-reconfirm']},
   {d:'2026-09-25',lbl:'Fri 25 Sep',day:'Fri',num:'25',loc:'phuket',summ:'Bali morning free. Kenji 13:30 → airport. Fly 16:10 → Phuket 19:10. Check in Thavorn.',conflicts:[]},
   {d:'2026-09-26',lbl:'Sat 26 Sep',day:'Sat',num:'26',loc:'phuket',summ:'Free day. Muay Thai 19:30 evening (pending).',conflicts:[]},
   {d:'2026-09-27',lbl:'Sun 27 Sep',day:'Sun',num:'27',loc:'phuket',summ:'Golf: pickup 08:00, tee 09:10, back ~13:00. Evening: Phuket Old Town Walking Street.',conflicts:[]},
@@ -386,10 +386,10 @@ const BASE_ITEMS=[
  links:[{l:'Booking.com reservations',u:'https://www.booking.com/myreservations.html'}]},
 
 {id:'A03',type:'accom',status:'locked',date:'2026-09-23',endDate:'2026-09-25',time:'00:35 arrival',
- title:'Villa Matahari Reef',sub:'2 bed / 2.5 bath · Uluwatu, Bali · Airbnb',loc:'bali',
- addr:'Gang Guan, Kuta Selatan, Uluwatu, Bali',phone:null,ref:'Airbnb · Kaia Property Management',cost:null,
- note:'Arriving 00:35 from DPS. Kenji collecting. Check-out Fri 25 Sep ~13:00.',
- links:[{l:'Airbnb trips',u:'https://www.airbnb.com.au/trips/v1'}]},
+ title:'Discovery Kartika Plaza Hotel',sub:'3 nights · Kuta Beach, Bali · 5-star · Booking.com',loc:'bali',
+ addr:'Jl. Kartika Plaza, South Kuta Beach, 80361 Kuta, Indonesia',phone:'+62 361 2001300',ref:'Booking.com',cost:null,
+ note:'Booking: Tue 22 – Fri 25 Sep. Arriving 00:35 Wed 23 from DPS — notify hotel of late arrival. Check-in officially from 2PM. Check-out by 12:00 noon Fri 25. Kenji collecting from DPS. Kenji drop-off to airport ~13:30 Fri 25.',
+ links:[{l:'Booking.com reservations',u:'https://www.booking.com/myreservations.html'}]},
 
 {id:'A04',type:'accom',status:'locked',date:'2026-09-25',endDate:'2026-09-29',time:'check-in from arrival',
  title:'Thavorn Palm Beach Resort',sub:'Seaview Infinity Pool 2-Bed Duplex Suite · 135m² · Karon Beach',loc:'phuket',
@@ -440,7 +440,7 @@ const BASE_ITEMS=[
 
 {id:'P04',type:'transport',status:'pending',date:'2026-09-23',time:'00:35 airport pickup',
  title:'Kenji: DPS Airport Pickup',sub:'Bali Kenji Tour & Travel · Arrival 00:35 Wed 23',loc:'bali',
- addr:'DPS Ngurah Rai → Villa Matahari Reef, Uluwatu',phone:null,ref:null,cost:'Late-night surcharge TBC (on top of IDR 750k/day)',
+ addr:'DPS Ngurah Rai → Discovery Kartika Plaza Hotel, Kuta Beach',phone:null,ref:null,cost:'Late-night surcharge TBC (on top of IDR 750k/day)',
  note:'Contact via Facebook Messenger "Bali Kenji". Driver team of four — confirm which team member is coming and exact late-night price.',
  links:[{l:'Facebook "Bali Kenji"',u:'https://www.facebook.com/search/top?q=bali+kenji+tour'}]},
 
@@ -458,8 +458,8 @@ const BASE_ITEMS=[
 
 {id:'P07',type:'transport',status:'pending',date:'2026-09-25',time:'13:30 pickup',
  title:'Kenji: DPS Airport Drop-off',sub:'Villa → DPS for 16:10 flight',loc:'bali',
- addr:'Villa Matahari Reef → Bali Ngurah Rai DPS',phone:null,ref:null,cost:'Included in Kenji arrangement',
- note:'Pickup ~13:30 from villa for 16:10 AirAsia. Confirm the night before.',
+ addr:'Discovery Kartika Plaza Hotel, Kuta → Bali Ngurah Rai DPS',phone:null,ref:null,cost:'Included in Kenji arrangement',
+ note:'Pickup ~13:30 from hotel for 16:10 AirAsia. Check out by noon, then wait. Confirm the night before.',
  links:[{l:'Facebook "Bali Kenji"',u:'https://www.facebook.com/search/top?q=bali+kenji+tour'}]},
 
 /* IDEAS */
@@ -507,7 +507,7 @@ const BASE_ITEMS=[
 {id:'R13',type:'food',status:'idea',date:null,time:'07:30–23:30',
  title:'Rachael & Mike Homemade Kitchen',sub:'Kerobokan · Italian/Western homemade · Pasta, lasagne, ribs',loc:'bali',
  addr:'Jln. Taman Sari 1, Kerobokan, Bali',phone:'+6287887193009',ref:null,cost:null,
- note:'Homemade Italian and Western dishes — spaghetti bolognese, lasagne, stuffed cabbage rolls, ribs. Open Wed–Mon 07:30–23:30 (closed Tuesdays). Kerobokan is ~15 min north of Uluwatu if driving with Kenji.',
+ note:'Homemade Italian and Western dishes — spaghetti bolognese, lasagne, stuffed cabbage rolls, ribs. Open Wed–Mon 07:30–23:30 (closed Tuesdays). Kerobokan is ~15 min north of Kuta — easy with Kenji.',
  links:[]},
 
 {id:'R12',type:'food',status:'idea',date:null,time:'Always open',
