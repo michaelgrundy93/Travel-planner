@@ -620,7 +620,7 @@ const STREET_FOOD={
 ══════════════════════════════════════ */
 let S={overrides:{},customItems:[],baliChecks:{}};
 let CAP=null, READONLY=false;
-let VIEW='today', SEL_DAY='', OPT_F='all', BK_TAB='flights', MAP_LOC='phuket';
+let VIEW='today', SEL_DAY='', OPT_STAY='phuket1', BK_TAB='flights', MAP_LOC='phuket';
 let SWIPE_X=0, SEARCH_OPEN=false, SEARCH_Q='', PENDING_LINK='';
 
 function initSelDay(){
@@ -657,11 +657,11 @@ async function saveState(){
   catch(e){if(e&&e.code==='not_writer')READONLY=true;}
 }
 function saveUI(){
-  try{sessionStorage.setItem('tui2',JSON.stringify({v:VIEW,sd:SEL_DAY,of:OPT_F,bt:BK_TAB,ml:MAP_LOC}));}catch{}
+  try{sessionStorage.setItem('tui2',JSON.stringify({v:VIEW,sd:SEL_DAY,os:OPT_STAY,bt:BK_TAB,ml:MAP_LOC}));}catch{}
 }
 function loadUI(){
   try{const u=JSON.parse(sessionStorage.getItem('tui2')||'{}');
-    if(u.v)VIEW=u.v;if(u.sd)SEL_DAY=u.sd;if(u.of)OPT_F=u.of;if(u.bt)BK_TAB=u.bt;if(u.ml)MAP_LOC=u.ml;
+    if(u.v)VIEW=u.v;if(u.sd)SEL_DAY=u.sd;if(u.os)OPT_STAY=u.os;if(u.bt)BK_TAB=u.bt;if(u.ml)MAP_LOC=u.ml;
   }catch{}
 }
 
@@ -992,39 +992,85 @@ function renderBookings(){
 /* ══════════════════════════════════════
    VIEW: OPTIONS
 ══════════════════════════════════════ */
+const STAYS=[
+  {k:'phuket1',l:'Phuket',sub:'Amari · 17–20 Sep',emoji:'🏖️'},
+  {k:'samui',l:'Koh Samui',sub:'20–22 Sep',emoji:'🌴'},
+  {k:'bali',l:'Bali',sub:'22–25 Sep',emoji:'🌺'},
+  {k:'phuket2',l:'Phuket',sub:'Thavorn · 25–29 Sep',emoji:'⛳'},
+];
+function getStayItems(stayKey){
+  const dismissed=S.dismissedIdeas||[];
+  const all=allItems().filter(i=>i.status==='idea'&&!dismissed.includes(i.id));
+  if(stayKey==='bali') return all.filter(i=>i.loc==='bali'&&(!i.stayKey||i.stayKey===stayKey));
+  if(stayKey==='samui') return all.filter(i=>i.loc==='samui'&&(!i.stayKey||i.stayKey===stayKey));
+  if(stayKey==='phuket1') return all.filter(i=>i.loc==='phuket'&&(!i.date||i.date<='2026-09-20')&&(!i.stayKey||i.stayKey===stayKey));
+  if(stayKey==='phuket2') return all.filter(i=>i.loc==='phuket'&&(!i.date||i.date>='2026-09-25')&&(!i.stayKey||i.stayKey===stayKey));
+  return[];
+}
 function renderOptions(){
-  const ideas=allItems().filter(i=>i.status==='idea'&&i.type!=='food');
-  const food=[...FOOD_ITEMS].map(i=>effectItem(i.id)).filter(Boolean);
-  const filters=[{k:'all',l:'All ideas'},{k:'phuket',l:'Phuket'},{k:'samui',l:'Samui'},{k:'bali',l:'Bali'},{k:'food',l:'🍽️ Eat & drink'}];
-  const fHtml=filters.map(f=>`<button class="fbt on ${f.k}${OPT_F===f.k?' on '+f.k:''}" style="${OPT_F!==f.k?'color:var(--t3);border-color:var(--b)':''}" onclick="setOF('${f.k}')">${f.l}</button>`).join('');
+  const stay=OPT_STAY||'phuket1';
+  const allForStay=getStayItems(stay);
+  const items=allForStay.filter(i=>i.type!=='food');
+  const food=allForStay.filter(i=>i.type==='food');
+  const dismissed=S.dismissedIdeas||[];
 
-  let items=OPT_F==='food'?food:ideas.filter(i=>OPT_F==='all'||i.loc===OPT_F);
+  const tabBar=`<div style="display:flex;overflow-x:auto;gap:8px;padding:10px 16px;border-bottom:1px solid var(--b);-webkit-overflow-scrolling:touch;scrollbar-width:none">
+    ${STAYS.map(s=>{
+      const act=stay===s.k;
+      return`<button onclick="setOS('${s.k}')" style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-start;padding:8px 12px;border-radius:10px;border:1.5px solid ${act?'var(--a)':'var(--b)'};background:${act?'var(--a)':'var(--s)'};cursor:pointer">
+        <span style="font-size:13px;font-weight:700;color:${act?'#fff':'var(--t)'};white-space:nowrap">${s.emoji} ${s.l}</span>
+        <span style="font-size:11px;color:${act?'rgba(255,255,255,0.75)':'var(--t3)'};white-space:nowrap">${s.sub}</span>
+      </button>`;
+    }).join('')}
+  </div>`;
 
-  // Street food section
+  function dcrd(item){
+    return`<div style="position:relative">
+      ${card(item,{showDate:!!item.date})}
+      <button onclick="dismissIdea('${item.id}')" title="Dismiss" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;border:1px solid var(--b);background:var(--bg);color:var(--t3);font-size:15px;line-height:26px;text-align:center;cursor:pointer;padding:0;z-index:2">×</button>
+    </div>`;
+  }
+
+  let foodHtml='';
+  if(food.length){
+    foodHtml=`<div style="margin-top:8px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px;padding-top:4px">🍽️ Eat &amp; drink</div>
+      <div style="display:flex;flex-direction:column;gap:9px">${food.map(i=>dcrd(i)).join('')}</div>
+    </div>`;
+  }
+
   let sfHtml='';
-  if(OPT_F==='all'||OPT_F==='phuket'||OPT_F==='food'){
-    const mk=(label,arr)=>`<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:7px">${label}</div>${arr.map(f=>`<div style="display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid var(--b)"><span style="font-size:13px;font-weight:600;color:var(--t);width:130px;flex-shrink:0">${esc(f.name)}</span><span style="font-size:12px;color:var(--t2)">${esc(f.desc)}</span></div>`).join('')}</div>`;
-    sfHtml=`<div style="padding:0 16px;margin-top:16px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:10px">Street food — must try</div>
+  if(stay==='phuket1'||stay==='phuket2'){
+    const mk=(label,arr)=>`<div style="margin-bottom:10px"><div style="font-size:11px;font-weight:600;color:var(--t3);margin-bottom:6px">${label}</div>${arr.map(f=>`<div style="display:flex;align-items:baseline;gap:8px;padding:6px 0;border-bottom:1px solid var(--b)"><span style="font-size:13px;font-weight:600;color:var(--t);width:130px;flex-shrink:0">${esc(f.name)}</span><span style="font-size:12px;color:var(--t2)">${esc(f.desc)}</span></div>`).join('')}</div>`;
+    sfHtml=`<div style="margin-top:8px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px">Street food — must try</div>
       <div style="background:var(--s);border-radius:12px;border:1px solid var(--b);padding:12px 14px">
         ${mk('Phuket specialties',STREET_FOOD.phuket)}
         ${mk('Classics for Ezra',STREET_FOOD.classic)}
-        <div style="font-size:12px;color:var(--t2);margin-top:4px">📍 Best spot: Thalang Rd Old Town walking street, Sunday evenings ~16:00–22:00 (Sun 27 Sep after golf). Also Malin Plaza, Patong.</div>
+        <div style="font-size:12px;color:var(--t2);margin-top:4px">📍 Thalang Rd Old Town — Sunday evenings 16:00–22:00. Also Malin Plaza, Patong.</div>
       </div>
     </div>`;
   }
 
+  const empty=!items.length&&!food.length;
+  const restoreHtml=dismissed.length?`<div style="text-align:center;margin-top:4px"><button onclick="restoreDismissed()" style="font-size:12px;color:var(--t3);background:none;border:none;cursor:pointer;padding:4px 0">↩ Restore dismissed (${dismissed.length})</button></div>`:'';
+
   return`<div id="v-options">
-    <div style="padding:14px 16px 0">
-      <div style="font-family:var(--ffd);font-size:20px;font-weight:800;color:var(--t);margin-bottom:3px">Ideas & Options</div>
-      <div style="font-size:13px;color:var(--t2);margin-bottom:12px">Unscheduled — not booked, not forgotten.</div>
+    <div style="padding:14px 16px 8px">
+      <div style="font-family:var(--ffd);font-size:20px;font-weight:800;color:var(--t);margin-bottom:2px">Ideas</div>
+      <div style="font-size:13px;color:var(--t2)">Not booked — things to look for on the day.</div>
     </div>
-    <div class="opt-filter" style="padding:0 16px 10px;margin-bottom:0">${fHtml}</div>
-    <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:9px">
-      ${items.map(i=>card(i,{showDate:!!i.date})).join('')}
-      ${!items.length?`<div style="text-align:center;padding:28px 0;color:var(--t3)">Nothing here yet.</div>`:''}
+    ${tabBar}
+    <div style="padding:14px 16px;display:flex;flex-direction:column;gap:9px">
+      ${items.map(i=>dcrd(i)).join('')}
+      ${empty?`<div style="text-align:center;padding:24px 0;color:var(--t3);font-size:13px">Nothing here yet — add your own below.</div>`:''}
+      ${foodHtml}
+      ${sfHtml}
+      <button onclick="openAddIdea('${stay}')" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;border-radius:10px;border:2px dashed var(--b);background:transparent;color:var(--a);font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;width:100%">
+        <span style="font-size:18px;line-height:1">+</span> Add idea
+      </button>
+      ${restoreHtml}
     </div>
-    ${sfHtml}
     <div style="height:16px"></div>
   </div>`;
 }
@@ -1333,7 +1379,36 @@ function render(){
 }
 
 function sv(v){VIEW=v;render();}
-function setOF(f){OPT_F=f;render();}
+function setOS(s){OPT_STAY=s;render();}
+function dismissIdea(id){
+  if(!S.dismissedIdeas)S.dismissedIdeas=[];
+  if(!S.dismissedIdeas.includes(id))S.dismissedIdeas.push(id);
+  saveState();render();
+}
+function restoreDismissed(){S.dismissedIdeas=[];saveState();render();}
+function openAddIdea(stayKey){
+  openModal(`<div style="padding:16px">
+    <div style="font-size:17px;font-weight:700;color:var(--t);margin-bottom:14px">Add an idea</div>
+    <input id="ai-title" placeholder="What is it?" autocomplete="off" style="width:100%;padding:10px 12px;border-radius:9px;border:1px solid var(--b);background:var(--s);color:var(--t);font-size:14px;margin-bottom:10px;box-sizing:border-box;outline:none">
+    <textarea id="ai-note" placeholder="Notes, address, cost… (optional)" rows="3" style="width:100%;padding:10px 12px;border-radius:9px;border:1px solid var(--b);background:var(--s);color:var(--t);font-size:14px;resize:none;box-sizing:border-box;outline:none"></textarea>
+    <div style="display:flex;gap:10px;margin-top:14px">
+      <button onclick="closeModalForce()" style="flex:1;padding:11px;border-radius:9px;border:1px solid var(--b);background:var(--s);color:var(--t2);font-size:14px;cursor:pointer">Cancel</button>
+      <button onclick="saveCustomIdea('${stayKey}')" style="flex:2;padding:11px;border-radius:9px;border:none;background:var(--a);color:#fff;font-size:14px;font-weight:600;cursor:pointer">Add idea</button>
+    </div>
+  </div>`);
+  setTimeout(()=>document.getElementById('ai-title')?.focus(),300);
+}
+function saveCustomIdea(stayKey){
+  const el=document.getElementById('ai-title');
+  const title=el?.value?.trim();
+  if(!title){if(el)el.style.borderColor='#e74c3c';return;}
+  const note=document.getElementById('ai-note')?.value?.trim();
+  const locMap={phuket1:'phuket',samui:'samui',bali:'bali',phuket2:'phuket'};
+  if(!S.customItems)S.customItems=[];
+  S.customItems.push({id:'C'+Date.now(),type:'activity',status:'idea',loc:locMap[stayKey]||'phuket',
+    stayKey,title,note:note||null,sub:'Your idea',date:null,time:null,cost:null,ref:null,addr:null,phone:null,links:[]});
+  saveState();closeModalForce();render();
+}
 
 /* ══════════════════════════════════════
    MODAL
